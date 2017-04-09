@@ -1,0 +1,16 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Data files
+*.csv
+*.xlsx
+*.xls
+
+# Office Files
+*.ppt
+*.pptx
+*.pdf
+
+#Junk
+.ipynb_checkpoints/
+.idea/
