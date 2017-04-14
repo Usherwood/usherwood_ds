@@ -10,13 +10,13 @@ with open('LICENSE') as f:
     license = f.read()
 
 setup(
-    name='utilities',
+    name='usherwood_ds',
     version='0.0.1',
-    description='Sample package for Python-Guide.org',
+    description='Peter J Usherwoods personal data science project',
     long_description=readme,
-    author='Kenneth Reitz',
-    author_email='me@kennethreitz.com',
-    url='https://github.com/kennethreitz/samplemod',
+    author='Peter J Usherwood',
+    author_email='peterjusherwood93@gmail.com',
+    url='https://github.com/Usherwood/usherwood_ds',
     license=license,
     packages=find_packages(exclude=('tests', 'docs'))
 )
