@@ -11,6 +11,6 @@ __pycache__/
 *.pptx
 *.pdf
 
-#Junk
+# Junk
 .ipynb_checkpoints/
 .idea/
