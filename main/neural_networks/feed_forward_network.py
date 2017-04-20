@@ -81,6 +81,13 @@ class NeuralNetwork:
         self.m[0] += self.lr * np.dot((errors[-1] * y[0] * (1 - y[0])), inputs.T)
 
     def train(self, train_X, train_Y, epochs=2):
+        """
+        The primary function for training the neural network
+
+        :param train_X: Pandas df of training records, values must be between 0.01 and 0.99
+        :param train_Y: Pandas df of targets, values must be between 0.01 and 0.99
+        :param epochs: The number of times to iterate over the training coprus
+        """
 
         train_X.reset_index(drop=True, inplace=True)
         train_Y.reset_index(drop=True, inplace=True)
@@ -127,7 +134,7 @@ class NeuralNetwork:
         x += [np.dot(self.m[-1], y[-1])]
         y += [self.activation_function(x[-1])]
 
-        return y[-1]
+        return [el[0] for el in y[-1]]
 
     def accuracy(self, test_X, test_Y):
 
@@ -150,6 +157,13 @@ class NeuralNetwork:
 
 
 def save_network(network, filepath):
+    """
+    Saves (pickles) the above class once trained
+
+    :param network: Instance of class NeuralNetwork
+    :param filepath: String filepath
+    """
+
     with open(filepath, 'wb') as output:
         pickle.dump(network, output, pickle.HIGHEST_PROTOCOL)
 
@@ -157,7 +171,32 @@ def save_network(network, filepath):
 
 
 def load_network(filepath):
+    """
+    Load a previously trained and pickled model
+
+    :param filepath: String filepath
+    :return: The saved and trained instance of the NeuralNetwork class
+    """
+
     with open(filepath, 'rb') as input:
         network = pickle.load(input)
 
     return network
+
+
+def scale_matrix_to_nn(matrix):
+    """
+    Scales the input matrix (or array) to between 0.01 and 0.99
+
+    :param matrix: np array (matrix or pd dataframe) to be scaled
+
+    output scaled matrix: Scaled matrix as a pd dataframe
+    """
+
+    min_val = matrix.min()
+    max_val = matrix.max()
+
+    scaled_matrix = (((matrix - min_val) / (max_val - min_val)) * .98) + 0.01
+    scaled_matrix = pd.DataFrame(scaled_matrix)
+
+    return scaled_matrix
