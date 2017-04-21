@@ -1,6 +1,6 @@
-Peter J Usherwood's Personal Data Science Repository
+Peter J Usherwood's personal data science repository
 ========================
 
 
-Repositório pessoal de ciencia de dados do Peter J Usherwood's
+Repositório pessoal de ciencia de dados do Peter J Usherwood
 ========================
