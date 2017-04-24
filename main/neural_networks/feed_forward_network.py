@@ -7,6 +7,7 @@ import pickle
 import scipy.special
 from numpy.linalg import pinv
 import numpy as np
+import pandas as pd
 import progressbar
 
 __author__ = "Peter J Usherwood"
@@ -18,7 +19,7 @@ class NeuralNetwork:
     Feedforward Neural Network, the most simple form of a neural network, it is not recurrent as data only flows forward
     """
 
-    def __init__(self, input_nodes=10, hidden_layers=[20], output_nodes=3, learning_rate=.3):
+    def __init__(self, input_nodes=10, hidden_layers=None, output_nodes=3, learning_rate=.3):
         """
         :param input_nodes: Int number of input nodes
         :param hidden_layers: Array of ints, length of array is the number of hidden layers, values are the number of nodes
@@ -26,6 +27,9 @@ class NeuralNetwork:
         :param output_nodes: Int number of output hidden nodes
         :param learning_rate: Float, learning rate
         """
+
+        if not hidden_layers:
+            hidden_layers = [20]
 
         self.inodes = input_nodes
         self.hidden_layers = len(hidden_layers)
@@ -178,8 +182,8 @@ def load_network(filepath):
     :return: The saved and trained instance of the NeuralNetwork class
     """
 
-    with open(filepath, 'rb') as input:
-        network = pickle.load(input)
+    with open(filepath, 'rb') as input_f:
+        network = pickle.load(input_f)
 
     return network
 

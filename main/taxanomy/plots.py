@@ -10,8 +10,8 @@ __python_version__ = "3.6"
 
 
 def opportunities(ax, category_names, volumes, opportunity_scores, tertiary=None, labels=False, labels_min_vol=50,
-                  opportunity_name='Sentiment', colour_scale=.5, font_size=7, x_lims=[0, 500], y_lims=[-10, 40],
-                  colour=[140/255, 200/255, 219/255]):
+                  opportunity_name='Sentiment', colour_scale=.5, font_size=7, x_lims=None, y_lims=None,
+                  colour=None):
     """
     To plot opportunities for categories made through a taxonomy
 
@@ -34,12 +34,19 @@ def opportunities(ax, category_names, volumes, opportunity_scores, tertiary=None
 
     sns.set_style("white")
 
+    if not colour:
+        colour = [140/255, 200/255, 219/255]
+    if not x_lims:
+        x_lims = [0, 500]
+    if not y_lims:
+        y_lims = [-10, 40]
+
     if labels:
         for x, y, s in zip(volumes, opportunity_scores, category_names):
             if x < labels_min_vol:
                 pass
             else:
-                ax.text(x, y + np.random.standard_normal(1) * .05, s, size=font_size, color='k')
+                ax.text(x, y + np.random.standard_normal(1)*.05, s, size=font_size, color='k')
 
     if tertiary is None:
         ax.scatter(volumes, opportunity_scores, s=volumes * .3, c=colour, lw=0)
