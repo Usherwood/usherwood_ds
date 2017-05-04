@@ -44,18 +44,24 @@ class NeuralNetwork:
         self.m += [np.random.normal(0, pow(self.onodes, -.5), (self.onodes, self.hnodes[-1]))]
 
     def activation_function(self, inputs):
-
         output = np.array([[scipy.special.expit(value[0])] for value in inputs])
-
         return output
 
     def inverse_activation_function(self, inputs):
-
         output = np.array([[scipy.special.logit(value[0])] for value in inputs])
-
         return output
 
     def train_element(self, inputs_list, targets_list):
+        """
+        Update the NN by training it with a single record
+
+        :param inputs_list: List of input node values (pre-scaled)
+        :param targets_list: List of targets (1 per possible target outcome), with the maximum range of the activation
+         function for the desired class; minimum range of the activation function for the remaining classes
+
+        :return: Updates the model
+        """
+
         inputs = np.array(inputs_list, ndmin=2).T
         targets = np.array(targets_list, ndmin=2).T
 
@@ -65,7 +71,7 @@ class NeuralNetwork:
 
         # between hidden layers
         for i in range(1, self.hidden_layers):
-            x += [np.dot(self.m[i], x[i - 1])]
+            x += [np.dot(self.m[i], y[i - 1])] # changed x to y
             y += [self.activation_function(x[i])]
 
         # last hidden and the output
@@ -105,10 +111,12 @@ class NeuralNetwork:
                     bar.update(i + (e * train_length))
 
     def back_query_element(self, output_vector):
+
         outputs = np.array(output_vector, ndmin=2).T
         # Takes a pseudo inverse as the matrix is not square
-        m1_inv = pinv(self.m1)
-        m2_inv = pinv(self.m2)
+        m_inv = []
+        for i in range(0, self.hidden_layers):
+            m_inv[i] += pinv(self.m[i])
 
         o_x = self.inverse_activation_function(outputs)
         y1 = np.dot(m2_inv, o_x)
@@ -123,6 +131,14 @@ class NeuralNetwork:
         return inputs
 
     def query_element(self, inputs_list):
+        """
+        Take a list of values for each input node and find the result
+
+        :param inputs_list: List of input node values (pre-scaled)
+
+        :return: Probabilities of each target class
+        """
+
         inputs = np.array(inputs_list, ndmin=2).T
 
         # input to first hidden
@@ -141,6 +157,15 @@ class NeuralNetwork:
         return [el[0] for el in y[-1]]
 
     def accuracy(self, test_X, test_Y):
+        """
+        Calculate the accuracy on a test set (or validation set)
+
+        :param test_X: Pandas df of features
+        :param test_Y: Pandas df of targets (in dummy variable form)
+
+        :return: The accuracy, An array of the predicted probabilities per record (for a confusion matrix),
+        The score card (whether each record was correct or not)
+        """
 
         test_X.reset_index(drop=True, inplace=True)
         test_Y.reset_index(drop=True, inplace=True)
@@ -188,19 +213,18 @@ def load_network(filepath):
     return network
 
 
-def scale_matrix_to_nn(matrix):
+def scale_df_to_nn(matrix):
     """
-    Scales the input matrix (or array) to between 0.01 and 0.99
+    Scales the input df to between 0.01 and 0.99
 
     :param matrix: np array (matrix or pd dataframe) to be scaled
 
     output scaled matrix: Scaled matrix as a pd dataframe
     """
 
-    min_val = matrix.min()
-    max_val = matrix.max()
+    min_val = matrix.min().min()
+    max_val = matrix.max().max()
 
     scaled_matrix = (((matrix - min_val) / (max_val - min_val)) * .98) + 0.01
-    scaled_matrix = pd.DataFrame(scaled_matrix)
 
     return scaled_matrix
