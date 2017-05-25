@@ -30,6 +30,31 @@ def domains_to_binary(df_encoded, domain_column_key='Domain', num_domains=10):
     return df_encoded
 
 
+def date_to_binary_tod(pd_datetime, lower_hour=0, lower_minute=0, upper_hour=23, upper_minute=59):
+    """
+    Turn a pandas datetime value into a binary variable, good if "applied" to pandas column
+
+    :param pd_datetime: pandas datetime variable
+    :param lower_hour: Int, lower hour, 0-23
+    :param lower_minute: Int, lower minute, 0-59
+    :param upper_hour: Int, upper hour, 0-23
+    :param upper_minute: Int, upper minute, 0-59
+
+    :return: valid 1 or 0 to be assigned to a binary column
+    """
+    
+    current_hour = pd_datetime.hour
+    current_minute = pd_datetime.minute
+
+    valid = 0
+    if current_hour >= lower_hour:
+        if current_minute >= lower_minute:
+            if current_hour <= upper_hour:
+                if current_minute <= upper_minute:
+                    valid = 1
+    return valid
+
+
 def encoded_to_bycat_counts(df_encoded, tax_col_indicator='e_', cross_col_indicator='c_', prediction=True):
     """
     Transform a standard encoded file into a bycat (by category) file
