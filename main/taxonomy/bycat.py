@@ -30,7 +30,7 @@ def domains_to_binary(df_encoded, domain_column_key='Domain', num_domains=10):
     return df_encoded
 
 
-def date_to_binary_tod(pd_datetime, lower_hour=0, lower_minute=0, upper_hour=23, upper_minute=59):
+def date_to_binary_tod(pd_datetime, lower_hour=0, lower_minute=0, upper_hour=23, upper_minute=0):
     """
     Turn a pandas datetime value into a binary variable, good if "applied" to pandas column
 
@@ -42,16 +42,16 @@ def date_to_binary_tod(pd_datetime, lower_hour=0, lower_minute=0, upper_hour=23,
 
     :return: valid 1 or 0 to be assigned to a binary column
     """
-    
-    current_hour = pd_datetime.hour
-    current_minute = pd_datetime.minute
 
-    valid = 0
-    if current_hour >= lower_hour:
-        if current_minute >= lower_minute:
-            if current_hour <= upper_hour:
-                if current_minute <= upper_minute:
-                    valid = 1
+    current_minutes = (pd_datetime.hour*60) + pd_datetime.minute
+    lower_minutes = (lower_hour*60) + lower_minute
+    upper_minutes = (upper_hour*60) + upper_minute
+
+    if (current_minutes >= lower_minutes) and (current_minutes <= upper_minutes):
+        valid = 1
+    else:
+        valid = 0
+
     return valid
 
 
