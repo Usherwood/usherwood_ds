@@ -3,9 +3,9 @@
 """Standard text cleaning for pandas, used by many other functions, for more granularity use the composite
 functions separately"""
 
-from pos_ngrams.processing.stopwords import stopword_removal
-from pos_ngrams.preprocessing.cleaning import clean_text
-from pos_ngrams.preprocessing.stemming import stem_text
+from main.nlp.processing.stopwords import stopword_removal
+from main.nlp.preprocessing.cleaning import clean_text
+from main.nlp.preprocessing.stemming import stem_text
 
 __author__ = "Peter J Usherwood"
 __python_version__ = "3.5"

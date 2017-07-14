@@ -8,7 +8,7 @@ supplied by nltk, additional are for add on to the basic languages, for example 
 import os
 
 from nltk.corpus import stopwords
-from utils.linguistics.preprocessing.tokenizer import tokenizer_word, tokenizer_pos, de_tokenizer_pos
+from main.nlp.preprocessing.tokenizer import tokenizer_word, tokenizer_pos, de_tokenizer_pos
 
 __author__ = "Peter J Usherwood"
 __python_version__ = "3.6"
@@ -81,7 +81,7 @@ def create_stopwords_set(basic_language, adhoc_list=[], ignore_nltk=False):
         print(basic_language + ' is not in NLTK, looking in utils_data...')
         try:
             with open(os.path.join(os.path.dirname(__file__),
-                                   '../../utils_data/stopwords/language_basics/'+basic_language+'.txt'), 'r') as file:
+                                   '../../data/stopwords/language_basics/'+basic_language+'.txt'), 'r') as file:
                 stopwords_file = file.read().split(',')
                 stopwords_file = set(stopwords_file)
                 stopwords_set = stopwords_set.union(stopwords_file)

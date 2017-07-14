@@ -4,7 +4,7 @@
 
 import string
 
-from pos_ngrams.preprocessing.tokenizer import tokenizer_word, tokenizer_pos, de_tokenizer_pos
+from main.nlp.preprocessing.tokenizer import tokenizer_word, tokenizer_pos, de_tokenizer_pos
 
 __author__ = "Peter J Usherwood"
 __python_version__ = "3.6"

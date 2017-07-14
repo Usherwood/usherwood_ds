@@ -17,50 +17,6 @@ __author__ = "Peter J Usherwood"
 __python_version__ = "3.6"
 
 
-def parse_brown_tags(tag):
-    """
-    Created simplified tags from the Browns corpus
-
-    :param tag: Str, the current tag to be transformed
-
-    :return: transformed tag
-    """
-
-    NP = ['NP']
-    NN = ['NR', 'NN']
-    VB = ['VB', 'BE', 'DO', 'EX', 'HV']
-    NU = ['CD', 'OD']
-    AD = ['JJ']
-    QL = ['QL']
-    AV = ['RB', 'RN', 'RP']
-    NG = ['*:']
-
-    tag = tag[:2]
-
-    if tag in NP:
-        tag = 'NP'
-    elif tag in list(string.punctuation):
-        tag = tag
-    elif tag in NN:
-        tag = 'NN'
-    elif tag in VB:
-        tag = 'VB'
-    elif tag in NU:
-        tag = 'NU'
-    elif tag in AD:
-        tag = 'AD'
-    elif tag in QL:
-        tag = 'QL'
-    elif tag in AV:
-        tag = 'AV'
-    elif tag in NG:
-        tag = '*:'
-    else:
-        tag = 'OT'
-
-    return tag
-
-
 def parse_browns_corpus_to_simplified(browns_tagged_sents):
     """
     Parse the tagged Browns corpus (in an array of sentences) into simplified tags
@@ -72,7 +28,7 @@ def parse_browns_corpus_to_simplified(browns_tagged_sents):
 
     sents_simplified = []
     for sent in browns_tagged_sents:
-        sents_simplified.append([(tuples[0], parse_brown_tags(tuples[1])) for tuples in sent])
+        sents_simplified.append([(tuples[0], simplify_brown_tags(tuples[1])) for tuples in sent])
 
     return sents_simplified
 
@@ -141,3 +97,91 @@ def tag_snippet(snippet, tagger_name):
         tokens = re.findall(r"[\w']+|[.,!?;]", sent)
         sent_tagged += tagger.tag(tokens)
     return sent_tagged
+
+
+def simplify_brown_tags(tag):
+    """
+    Created simplified tags from the Browns corpus
+
+    :param tag: Str, the current tag to be transformed
+
+    :return: transformed tag
+    """
+
+    NP = ['NP']  # proper noun
+    NN = ['NR', 'NN']  # noun
+    VB = ['VB', 'BE', 'DO', 'EX', 'HV']  # verb
+    NU = ['CD', 'OD']  # numbers
+    AD = ['JJ']  # adjective
+    QL = ['QL']  # qualifier
+    AV = ['RB', 'RN', 'RP']  # adverb
+    NG = ['*:']  # negator
+
+    tag = tag[:2]
+
+    if tag in NP:
+        tag = 'NP'
+    elif tag in list(string.punctuation):
+        tag = tag
+    elif tag in NN:
+        tag = 'NN'
+    elif tag in VB:
+        tag = 'VB'
+    elif tag in NU:
+        tag = 'NU'
+    elif tag in AD:
+        tag = 'AD'
+    elif tag in QL:
+        tag = 'QL'
+    elif tag in AV:
+        tag = 'AV'
+    elif tag in NG:
+        tag = '*:'
+    else:
+        tag = 'OT'
+
+    return tag
+
+
+def simplify_parole_tags(tag):
+    """
+    Created simplified tag from a parole tagged corpus
+
+    :param tag: Str, the current tag to be transformed
+
+    :return: transformed tag
+    """
+
+    NP = ['NP']  # proper noun
+    NN = ['NC']  # noun
+    VB = ['VS', 'VM', 'VA']  # verb
+    NU = ['Z', 'Zm', 'Zp']  # numbers
+    AD = ['AO', 'AQ']  # adjective
+    QL = []  # qualifier
+    AV = ['RG', 'RN']  # adverb
+    NG = []  # negator
+
+    tag = tag[:2]
+
+    if tag in NP:
+        tag = 'NP'
+    elif tag in list(string.punctuation):
+        tag = tag
+    elif tag in NN:
+        tag = 'NN'
+    elif tag in VB:
+        tag = 'VB'
+    elif tag in NU:
+        tag = 'NU'
+    elif tag in AD:
+        tag = 'AD'
+    elif tag in QL:
+        tag = 'QL'
+    elif tag in AV:
+        tag = 'AV'
+    elif tag in NG:
+        tag = '*:'
+    else:
+        tag = 'OT'
+
+    return tag
