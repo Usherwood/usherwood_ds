@@ -34,8 +34,14 @@ def DF(column_list=None, n_records=50):
     for col_set in column_list:
         ctype = col_set['type']
         for i in range(col_set['n_itters']):
+
+            if col_set['n_itters'] == 1:
+                name = col_set['name']
+            else:
+                name = col_set['name'] + str(i)
+                
             class_name = globals()[ctype]
-            column_i = class_name(col_set['name'] + str(i), n_records, col_set['args'])
+            column_i = class_name(name, n_records, col_set['args'])
             column_outputs.append(column_i)
 
     headers = []
@@ -138,7 +144,7 @@ class TextRandom:
 
         self.name = name
         self.n_records = n_records
-        self.corpus = args.get('corpus', brown.words())
+        self.corpus = args.get('corpus', brown.words()[:100000])
         self.remove_brackets_and_quotes = args.get('remove_brackets_and_quotes', True)
 
         self.cache = {}
@@ -148,6 +154,8 @@ class TextRandom:
 
         self.corpus_size = len(self.corpus)
         self.database()
+
+        self.col = self.create_array()
 
     def triples(self):
         """
@@ -242,7 +250,7 @@ class TextTopic(object):
         self.name = name
         self.n_records = n_records
         self.topic_word = args.get('topic_word', 'city')
-        self.corpus = args.get('corpus', brown.words())
+        self.corpus = args.get('corpus', brown.words()[:100000])
         self.remove_brackets_and_quotes = args.get('remove_brackets_and_quotes', True)
 
         self.cache_f = {}
@@ -255,6 +263,8 @@ class TextTopic(object):
 
         self.corpus_size = len(self.corpus)
         self.database()
+
+        self.col = self.create_array()
 
     def triples(self):
         """
