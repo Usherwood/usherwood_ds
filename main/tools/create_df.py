@@ -7,8 +7,6 @@ import pandas as pd
 import numpy as np
 import random
 
-from nltk.corpus import brown
-
 __author__ = "Peter J Usherwood"
 __python_version__ = "3.6"
 
@@ -39,7 +37,7 @@ def DF(column_list=None, n_records=50):
                 name = col_set['name']
             else:
                 name = col_set['name'] + str(i)
-                
+
             class_name = globals()[ctype]
             column_i = class_name(name, n_records, col_set['args'])
             column_outputs.append(column_i)
@@ -138,9 +136,12 @@ class TextRandom:
         :param name: String column root name
         :param n_records: Int number of rows per column
         :param args:
-            - corpus: An uncleaned tokenized corpus to be used as a training set for the markov chains
+            - corpus: An uncleaned word tokenized corpus to be used as a training set for the markov chains
             - remove_brackets_and_quotes: Bool, remove brackets and quotes that can otherwise appear irregular
         """
+
+        if args.get('corpus', None) is None:
+            from nltk.corpus import brown
 
         self.name = name
         self.n_records = n_records
@@ -243,9 +244,12 @@ class TextTopic(object):
         :param n_records: Int number of rows per column
         :param args:
             - topic_word: String, word to generate sentences around
-            - corpus: An uncleaned tokenized corpus to be used as a training set for the markov chains
+            - corpus: An uncleaned word tokenized corpus to be used as a training set for the markov chains
             - remove_brackets_and_quotes: Bool, remove brackets and quotes that can otherwise appear irregular
         """
+
+        if args.get('corpus', None) is None:
+            from nltk.corpus import brown
 
         self.name = name
         self.n_records = n_records
