@@ -33,18 +33,18 @@ def parse_browns_corpus_to_simplified(browns_tagged_sents):
     return sents_simplified
 
 
-def train_pos_tagger_simplified(name='simplified_en',
-                                corpus=brown.tagged_sents(),
-                                simplified=True,
-                                train_test_split=.8
-                                ):
+def train_pos_tagger(name='simplified_en',
+                     corpus=brown.tagged_sents(),
+                     simplified=True,
+                     train_test_split=.8
+                     ):
     """
-    Train the simplified tag pos tagger and persist to disk
+    Train the tag pos tagger and persist to disk
 
     :param name: The name of the file to persist to
     :param corpus: The tagged corpus to train and test on, it should be a list of sentences, each sentence should
     be a list of tuples with the word first and the pos tag second.
-    :param simplified: Bool, True to parse the tags to a simplified subset
+    :param simplified: Bool, True to parse the tags to a simplified subset (good for classification)
     :param train_test_split: Decimal between 0 and 1, the ration of the train to test split
     """
 
