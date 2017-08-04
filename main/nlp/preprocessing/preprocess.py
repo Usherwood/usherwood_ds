@@ -14,6 +14,7 @@ __python_version__ = "3.5"
 def preprocess_df(data,
                   text_field_key ='Snippet',
                   language='english',
+                  additional_list=[],
                   adhoc_stopwords=[],
                   stopped_not_stemmed=False,
                   pos_tuples=False):
@@ -23,6 +24,7 @@ def preprocess_df(data,
     :param data: Pandas dataframe
     :param text_field_key: The field name of the text to be cleaned
     :param language: Primary language (see stopwords/stemming)
+    :param additional_list: List of additional pre set stopwords (see stopwords)
     :param adhoc_stopwords: List of adhoc stopwords (see stopwords)
     :param stopped_not_stemmed: Return a field of cleaned and stopword removed text, useful for the categorizer
     :param pos_tuples: Bool, if tokens are a list of pos_tuples set this to true
@@ -39,12 +41,16 @@ def preprocess_df(data,
         print('Stemmed Text')
         data[text_field_key] = data.ix[:, 'Stemmed'].apply(lambda e: stopword_removal(text_string=e,
                                                                                       language=language,
+                                                                                      additional_language_list=
+                                                                                      additional_list,
                                                                                       adhoc_list=adhoc_stopwords))
         print('Removed Stopwords')
 
         if stopped_not_stemmed:
             data['Stopped'] = data.ix[:, 'Cleaned'].apply(lambda e: stopword_removal(text_string=e,
                                                                                      language=language,
+                                                                                     additional_language_list=
+                                                                                     additional_list,
                                                                                      adhoc_list=adhoc_stopwords))
             print('Stopped not Stemmed')
     else:
@@ -57,6 +63,8 @@ def preprocess_df(data,
         data[text_field_key] = data.ix[:, 'Stemmed'].apply(lambda e: stopword_removal(tokens=e,
                                                                                       pos_tuples=True,
                                                                                       language=language,
+                                                                                      additional_language_list=
+                                                                                      additional_list,
                                                                                       adhoc_list=adhoc_stopwords))
         print('Removed Stopwords')
 
@@ -64,6 +72,8 @@ def preprocess_df(data,
             data['Stopped'] = data.ix[:, 'Cleaned'].apply(lambda e: stopword_removal(tokens=e,
                                                                                      pos_tuples=True,
                                                                                      language=language,
+                                                                                     additional_language_list=
+                                                                                     additional_list,
                                                                                      adhoc_list=adhoc_stopwords))
     return data
 
@@ -72,6 +82,7 @@ def preprocess_string(text_string=None,
                       tokens=None,
                       pos_tuples=False,
                       language='english',
+                      additional_list = [],
                       adhoc_stopwords = []):
     """
     Function that carries out all standard preprocessing on a tring or list of tokens (normal or pos)
@@ -90,6 +101,7 @@ def preprocess_string(text_string=None,
         text = stem_text(text_string=text, language=language)
         text = stopword_removal(text_string=text,
                                 language=language,
+                                additional_list=additional_list,
                                 adhoc_stopwords=adhoc_stopwords)
         preped = text
     else:
@@ -98,6 +110,7 @@ def preprocess_string(text_string=None,
         tokens = stopword_removal(tokens=tokens,
                                   pos_tuples=pos_tuples,
                                   language=language,
+                                  additional_list=additional_list,
                                   adhoc_stopwords=adhoc_stopwords)
 
         preped = tokens

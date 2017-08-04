@@ -75,28 +75,34 @@ def train_pos_tagger(name='simplified_en',
     return True
 
 
-def tag_snippet(snippet, tagger_name):
-    """
-    Tag Snippets using a pos tagger
+class TagSnippets():
 
-    :param snippet: Text snippet
-    :param tagger_name: Name of pos tagger as it appears in utils_data/models/pos_taggers/
+    def __init__(self, tagger_name):
+        """
 
-    :return: List of tuples for the tagged snippet
-    """
+        :param tagger_name: Name of pos tagger as it appears in utils_data/models/pos_taggers/
+        """
+        file = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../../utils_data/models/pos_taggers/' +
+                            tagger_name + '.pkl')
 
-    file = os.path.join(os.path.dirname(os.path.realpath(__file__)),'../../../utils_data/models/pos_taggers/' +
-                        tagger_name + '.pkl')
+        input = open(file, 'rb')
+        self.tagger = pickle.load(input)
+        input.close()
 
-    input = open(file, 'rb')
-    tagger = pickle.load(input)
-    input.close()
+    def tag_snippet(self, snippet):
+        """
+        Tag Snippets using a pos tagger
 
-    sent_tagged = []
-    for sent in tokenizer_sentence(snippet):
-        tokens = re.findall(r"[\w']+|[.,!?;]", sent)
-        sent_tagged += tagger.tag(tokens)
-    return sent_tagged
+        :param snippet: Text snippet
+
+        :return: List of tuples for the tagged snippet
+        """
+
+        sent_tagged = []
+        for sent in tokenizer_sentence(str(snippet)):
+            tokens = re.findall(r"[\w']+|[.,!?;]", sent)
+            sent_tagged += self.tagger.tag(tokens)
+        return sent_tagged
 
 
 def simplify_brown_tags(tag):

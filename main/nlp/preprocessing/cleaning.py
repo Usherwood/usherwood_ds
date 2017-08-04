@@ -3,11 +3,12 @@
 """Functions for cleaning generic text data, the master function 'clean_text' calls all sub functions if required."""
 
 import string
+import re
 
 from main.nlp.preprocessing.tokenizer import tokenizer_word, tokenizer_pos, de_tokenizer_pos
 
 __author__ = "Peter J Usherwood"
-__python_version__ = "3.6"
+__python_version__ = '3.5'
 
 
 def clean_text(text_string=None,
@@ -30,17 +31,14 @@ def clean_text(text_string=None,
     :return: String comprable to the input but with all words cleaned.
     """
 
-    if text_string:
-        text_string = str(text_string)
-        tokens = tokenizer_word(text_string)
+    if not pos_tuples:
+        if tokens is None:
+            tokens = []
 
-    if pos_tuples:
-        tokens, tokens_tags = tokenizer_pos(tokens)
-        tokens_original = tokens
+        if text_string:
+            text_string = str(text_string)
+            tokens = tokenizer_word(text_string)
 
-    if tokens is None:
-        text = ''
-    else:
         if remove_punctuation:
             tokens = remove_punctuation_tokens(tokens,
                                                punctuation=punctuation)
@@ -50,13 +48,25 @@ def clean_text(text_string=None,
         if lower:
             tokens = lower_tokens(tokens)
 
+        if text_string is not None:
+            cleaned = " ".join(tokens)
+        else:
+            cleaned = tokens
 
-    if text_string:
-        cleaned = " ".join(tokens)
-    elif pos_tuples:
-        cleaned = de_tokenizer_pos(tokens, tokens_tags, tokens_original)
-    else:
-        cleaned = tokens
+    if pos_tuples:
+
+        tokens, tokens_tags = tokenizer_pos(tokens)
+
+        if remove_punctuation:
+            tokens = remove_punctuation_tokens(tokens,
+                                               punctuation=punctuation)
+        if remove_additional_whitespaces:
+            tokens = remove_additional_whitespace(tokens)
+
+        if lower:
+            tokens = lower_tokens(tokens)
+
+        cleaned = de_tokenizer_pos(tokens, tokens_tags)
 
     return cleaned
 
@@ -81,9 +91,13 @@ def remove_punctuation_tokens(tokens, punctuation=string.punctuation, replace_wi
     Removes punctuation from a list of tokens
 
     :param tokens: A list of tokens
-    :param punctuation: A string of punctuation marks to be removed
+    :param punctuation: A string of punctuation marks to be removed (defaults to none, used to default to =string.punctuation but not anymore)
+    :param regex_replacement: use regex to define punctuation to be replaced (this is default, if punctuation is None)
+    :param replace_with: the string to replace the punctuation with
     :return: A comparable list of tokens to the input but with punctuation removed
     """
+
+    # Done: add more comprehensive punctuation removal: s = re.sub(r'[^\w\s]','',s)
 
     cleaned_tokens = []
     for token in tokens:
