@@ -12,11 +12,11 @@ There are no docs for this project given the nature of its contence, a brief ove
 given below. All of it is my own original work, and can be used in compliance with the licence attached:
 
 - main: a package of .py files in a OO or functional style containing the bulk of my developed code and research
-        - df_creator: a package to create pandas df instanciated with model data for all application.
-        - neural_networks: research into neural nets including a numpy implementations of a FFN, and scripts for
-                           convolution networks
-        - nlp: series of nlp scripts including a modified n_grams code to use POS tuples
-        - tools: other code useful in a variety of applications
+    - df_creator: a package to create pandas df instanciated with model data for all application.
+    - neural_networks: research into neural nets including a numpy implementations of a FFN, and scripts for
+    convolution networks
+    - nlp: series of nlp scripts including a modified n_grams code to use POS tuples
+    - tools: other code useful in a variety of applications
 
 - tutorias: a series of jupyter notebook tutorials teaching the basics of Python and data science in Portuguese
 
@@ -24,7 +24,6 @@ given below. All of it is my own original work, and can be used in compliance wi
 
 - data: data that scripts in other directories will require to run, including stopword lists, corpus, and trained
         machine learning models
-
 
 Repositório pessoal de ciencia de dados do Peter J Usherwood
 ========================
