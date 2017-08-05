@@ -21,8 +21,7 @@ given below. All of it is my own original work, and can be used in compliance wi
 
 - sample_notebooks: procedural examples of how to run more complicated pipelines using work contained in main
 
-- data: data that scripts in other directories will require to run, including stopword lists, corpus, and trained
-        machine learning models
+- data: data that scripts in other directories will require to run, including stopword lists, corpus, and trained machine learning models
 
 Repositório pessoal de ciencia de dados do Peter J Usherwood
 ========================
