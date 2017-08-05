@@ -2,7 +2,7 @@
 
 """Function for removing stop words from text using a combination of NLTK and custom lists.
 
-Custom lists can be found in utils_data>stopwords. language_basics are basic stopword lists in languages not
+Custom lists can be found in data>stopwords. language_basics are basic stopword lists in languages not
 supplied by nltk, additional are for add on to the basic languages, for example explicit language removal."""
 
 import os
@@ -88,7 +88,7 @@ def create_stopwords_set(basic_language, additional_language_list=[], adhoc_list
         print(basic_language + ' is not in NLTK, looking in utils_data...')
         try:
             with open(os.path.join(os.path.dirname(__file__),
-                                   '../../utils_data/stopwords/language_basics/'+basic_language+'.txt'), 'r') as file:
+                                   '../../data/stopwords/language_basics/'+basic_language+'.txt'), 'r') as file:
                 stopwords_file = file.read().split(',')
                 stopwords_file = set(stopwords_file)
                 stopwords_set = stopwords_set.union(stopwords_file)
@@ -101,12 +101,12 @@ def create_stopwords_set(basic_language, additional_language_list=[], adhoc_list
     for additional_list in additional_language_list:
         try:
             with open(os.path.join(os.path.dirname(__file__),
-                                   '../../utils_data/stopwords/additional/' + additional_list + '.txt'), 'r') as file:
+                                   '../../data/stopwords/additional/' + additional_list + '.txt'), 'r') as file:
                 stopwords_file = file.read().split(',')
                 stopwords_file = set(stopwords_file)
                 stopwords_set = stopwords_set.union(stopwords_file)
         except OSError:
-            print(additional_list + ' does not exist. Skipping')
+            print(str(additional_list) + ' does not exist. Skipping')
 
     # Append adhoc words to set
     adhoc_set = set(adhoc_list)
