@@ -12,6 +12,7 @@ There are no docs for this project given the nature of its contents, a brief ove
 given below. All of it is my own original work, and can be used in compliance with the licence attached:
 
 - main: a package of .py files in a OO or functional style containing the bulk of my developed code and research
+
     - df_creator: a package to create pandas df instantiated with model data for all application.
     - neural_networks: research into neural nets including a numpy implementations of a FFN, and scripts for convolution networks
     - nlp: series of nlp scripts including a modified n_grams code to use POS tuples
