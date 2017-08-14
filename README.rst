@@ -2,7 +2,7 @@ Peter J Usherwood's personal data science repository
 ========================
 
 Welcome to my personal data science repository. My name is Peter Usherwood I am a professional data scientist
-https://www.linkedin.com/in/peter-usherwood-623aa9b6/
+https://www.linkedin.com/in/peter-usherwood/
 
 This repo is a collection of various pieces of my work. There is no further theme to this repository; some pieces of
 work will be moved into separate packages when they are complete to be used as stand alone products, others are
@@ -18,7 +18,7 @@ given below. All of it is my own original work, and can be used in compliance wi
     - nlp: series of nlp scripts including a modified n_grams code to use POS tuples
     - tools: other code useful in a variety of applications
 
-- tutorias: a series of jupyter notebook tutorials teaching the basics of Python and data science in Portuguese
+- tutoriais: a series of jupyter notebook tutorials teaching the basics of Python and data science in Portuguese
 
 - sample_notebooks: procedural examples of how to run more complicated pipelines using work contained in main
 
