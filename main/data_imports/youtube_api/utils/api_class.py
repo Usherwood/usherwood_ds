@@ -14,7 +14,8 @@ from apiclient.discovery import build
 
 from main.data_imports.youtube_api.utils.import_classes import YoutubeTextComment, YoutubeVideo, User
 
-with open(os.path.join(os.path.dirname(os.path.realpath(__file__)),"../api_credentials.json"), 'r') as openfile:
+
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)),"../../api_credentials.json"), 'r') as openfile:
     api_credentials = json.load(openfile)
 
 
