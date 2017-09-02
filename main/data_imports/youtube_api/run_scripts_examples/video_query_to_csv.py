@@ -7,8 +7,8 @@ __python_version__ = "3.5"
 
 import csv
 
-from utils.api_class import YoutubeAPI
-from utils.to_pandas import create_youtube_video_df
+from main.data_imports.youtube_api.utils.api_class import YoutubeAPI
+from main.data_imports.youtube_api.utils.to_pandas import create_youtube_video_df
 
 query = 'dogs'
 max_videos = 50

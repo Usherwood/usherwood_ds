@@ -5,6 +5,7 @@ __pycache__/
 *.csv
 *.xlsx
 *.xls
+*.json
 
 # Office Files
 *.ppt

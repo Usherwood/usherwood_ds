@@ -7,12 +7,14 @@ __python_version__ = "3.5"
 
 import json
 import time
+import os
+from datetime import datetime
 
 from apiclient.discovery import build
 
-from utils.import_classes import YoutubeTextComment, YoutubeVideo, User
+from main.data_imports.youtube_api.utils.import_classes import YoutubeTextComment, YoutubeVideo, User
 
-with open("../../api_credentials.json", 'r') as openfile:
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)),"../api_credentials.json"), 'r') as openfile:
     api_credentials = json.load(openfile)
 
 
@@ -44,6 +46,7 @@ class YoutubeAPI:
 
         except Exception as e:
             print('All parts not found for video, skipping')
+            return {'id':video_id}
 
     def get_videos_by_search_term(self,
                                   query,
@@ -92,7 +95,7 @@ class YoutubeAPI:
 
         return videos
 
-    def get_media_comments(self, video_id, num_comments=100, pt=''):
+    def get_video_comments(self, video_id, num_comments=100, pt=''):
         """
         Get the comments from a Youtube video
 
@@ -128,6 +131,15 @@ class YoutubeAPI:
                 return comments
 
     def get_user_subscriptions(self, youtube_author_id, num_subscriptions=20, pt=''):
+        """
+        Return a list of jsons, where each json is a user json of a user that the youtube_author_id subscribes to
+
+        :param youtube_author_id: Str, Youtube author ID
+        :param num_subscriptions: Int, Maximum number of subscriptions to return
+        :param pt: Str, page token
+
+        :return: List of jsons, where each json is a user json
+        """
 
         subscriptions = []
 
@@ -158,20 +170,15 @@ class YoutubeAPI:
             print(e)
             return subscriptions
 
-    def get_user_video_ids(self, youtube_author_id):
-
-        video_ids = []
-
-        playlists = self.get_user_playlists(youtube_author_id=youtube_author_id)
-
-        for playlist in playlists:
-            video_ids += self.get_playlist_video_ids(playlist['id'])
-
-        print('Total videos found:', str(len(video_ids)))
-
-        return video_ids
-
     def get_playlist_video_ids(self, youtube_playlist_id, pt=''):
+        """
+        Return a list of video ids given a playlist ID
+
+        :param youtube_playlist_id: Str, Youtube playlist ID
+        :param pt: Str, page token
+
+        :return: List of strings, list of video ids
+        """
 
         video_ids = []
 
@@ -196,6 +203,15 @@ class YoutubeAPI:
             return video_ids
 
     def get_user_playlists(self, youtube_author_id, pt=''):
+        """
+        Return a list of all playlist ids for a particular user/channel. A first step to returning all video ids for
+        a user
+
+        :param youtube_author_id: Str, Youtube author id
+        :param pt: Str, page token
+
+        :return: List of strings, list of all playlist ids
+        """
 
         playlists = []
 
@@ -211,7 +227,7 @@ class YoutubeAPI:
                     playlists.append(item)
                 pt = response.get('nextPageToken')
 
-                if pt == None:
+                if pt is None:
                     print('All playlists found:', str(len(playlists)))
                     return playlists
 
@@ -258,8 +274,13 @@ class YoutubeAPI:
 
         youtube_video = YoutubeVideo()
 
-        snippet = video['snippet']
-        statistics = video['statistics']
+        try:
+            snippet = video['snippet']
+            statistics = video['statistics']
+        except Exception as E:
+            print('Full video parts not found')
+            snippet = {}
+            statistics = {}
 
         youtube_video.youtube_video_id = video['id']
         youtube_video.youtube_author_id = snippet.pop('channelId', None)
@@ -267,7 +288,11 @@ class YoutubeAPI:
         youtube_video.author_name = snippet.pop('channelTitle', None)
         youtube_video.title = snippet.pop('title', None)
         youtube_video.description = snippet.pop('description', None)
-        youtube_video.publish_date = snippet.pop('publishedAt', None)  # TODO parse date
+        raw_time = snippet.pop('publishedAt', None)
+        if raw_time is None:
+            youtube_video.publish_date = None
+        else:
+            youtube_video.publish_date = datetime.strptime(raw_time, '%Y-%m-%dT%H:%M:%S.%fZ')
         youtube_video.view_count = statistics.pop('viewCount', 0)
         youtube_video.like_count = statistics.pop('likeCount', 0)
         youtube_video.dislike_count = statistics.pop('dislikeCount', 0)
@@ -302,7 +327,8 @@ class YoutubeAPI:
             youtube_comment.author_id = 'Not Found'
 
         youtube_comment.author_name = comment['snippet']['topLevelComment']['snippet']['authorDisplayName']
-        youtube_comment.date = comment['snippet']['topLevelComment']['snippet']['publishedAt']
+        youtube_comment.date = datetime.strptime(comment['snippet']['topLevelComment']['snippet']['publishedAt'],
+                                                 '%Y-%m-%dT%H:%M:%S.%fZ')
         youtube_comment.snippet = comment['snippet']['topLevelComment']['snippet']['textDisplay']
         youtube_comment.youtube_video_id = comment['snippet']['topLevelComment']['snippet']['videoId']
         youtube_comment.like_count = comment['snippet']['topLevelComment']['snippet']['likeCount']
