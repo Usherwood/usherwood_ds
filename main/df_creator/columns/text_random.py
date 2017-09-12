@@ -24,10 +24,12 @@ class TextRandom:
 
         if args.get('corpus', None) is None:
             from nltk.corpus import brown
+            self.corpus = args.pop('corpus', brown.words()[:200000])
+        else:
+            self.corpus = args.pop('corpus')
 
         self.name = name
         self.n_records = n_records
-        self.corpus = args.get('corpus', brown.words()[:100000])
         self.remove_brackets_and_quotes = args.get('remove_brackets_and_quotes', True)
 
         if len(args.keys()) > 0:
