@@ -32,7 +32,7 @@ class TextTopic(object):
 
         self.name = name
         self.n_records = n_records
-        self.topic_word = args.get('topic_word', 'city')
+        self.topic_word = args.pop('topic_word', 'city')
         self.remove_brackets_and_quotes = args.pop('remove_brackets_and_quotes', True)
 
         if len(args.keys()) > 0:
