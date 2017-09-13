@@ -55,7 +55,12 @@ def date_to_binary_tod(pd_datetime, lower_hour=0, lower_minute=0, upper_hour=23,
     return valid
 
 
-def encoded_to_bycat_counts(df_encoded, tax_col_indicator='e_', cross_col_indicator='c_', prediction=True):
+def encoded_to_bycat_counts(df_encoded,
+                            tax_col_indicator='e_',
+                            cross_col_indicator='c_',
+                            prediction=True,
+                            include_sentiment=True,
+                            sentiment_column_key='Sentiment'):
     """
     Transform a standard encoded file into a bycat (by category) file
 
@@ -63,14 +68,22 @@ def encoded_to_bycat_counts(df_encoded, tax_col_indicator='e_', cross_col_indica
     :param tax_col_indicator: String, the pattern that starts all categories in the taxonomy
     :param cross_col_indicator: String, the pattern that starts all cross-sectional categories
     :param prediction: Bool, if True adds dVolumedt and dSentimentdt values
+    :param include_sentiment: Bool, include the sentiment column as a cross sectional column
+    :param sentiment_column_key: String, the name of the sentiment column
 
     :return: bycat_counts df with the taxonomy as rows and counts of the cross sectional variables as columns
     """
+
+    if prediction:
+        include_sentiment = True
 
     df_encoded.fillna(0, inplace=True)
 
     tax_cols = list(df_encoded.columns[pd.Series(df_encoded.columns).str.startswith(tax_col_indicator)])
     cross_cols = list(df_encoded.columns[pd.Series(df_encoded.columns).str.startswith(cross_col_indicator)])
+
+    if include_sentiment:
+        cross_cols += [sentiment_column_key]
 
     df_cross = df_encoded[tax_cols+cross_cols]
 
@@ -88,10 +101,10 @@ def encoded_to_bycat_counts(df_encoded, tax_col_indicator='e_', cross_col_indica
         dvolumedts = []
         dsentimentdts = []
         for tax in tax_cols:
-            sub = df_encoded[df_encoded[tax] == 1].ix[:, ['Date', 'Volume', cross_col_indicator+'Sentiment']]
+            sub = df_encoded[df_encoded[tax] == 1].ix[:, ['Date', 'Volume', sentiment_column_key]]
 
-            sent = sub.resample('W').mean()[cross_col_indicator+'Sentiment']\
-                .fillna(sub.resample('W').mean()[cross_col_indicator+'Sentiment'].mean())
+            sent = sub.resample('W').mean()[sentiment_column_key]\
+                .fillna(sub.resample('W').mean()[sentiment_column_key].mean())
 
             volume = sub.resample('W').sum()['Volume'].fillna(sub.resample('W').sum()['Volume'].mean())
 
