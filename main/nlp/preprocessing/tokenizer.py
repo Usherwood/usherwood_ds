@@ -28,7 +28,6 @@ def tokenizer_word(text_string, keep_phrases=False):
 
     return tokens
 
-
 def tokenizer_sentence(text_string):
     """
     Tokenizer that tokenizes a string of text into sentences
@@ -52,7 +51,7 @@ def tokenizer_pos(pos_tuplets):
     :return: tokens, list of word tokens; tokens_tags, list of pos tags
     """
 
-    if type(pos_tuplets).isinstance(list):
+    if type(pos_tuplets) != type(['list']):
         raise TypeError('Input should be a list of POS tuples')
     if set([type(b) for b in pos_tuplets]) != set([type(('Tuple', 'E'))]):
         raise TypeError('Input should be a list of POS tuples')
@@ -76,11 +75,11 @@ def de_tokenizer_pos(tokens, tokens_tags):
     :return: pos_tuplets, List of pos tuplets
     """
 
-    if type(tokens).isinstance(list):
+    if type(tokens) != type(['list']):
         raise TypeError('tokens should be a list')
     if set([type(b) for b in tokens]) != set([type('String')]):
         raise TypeError('tokens should be a list of strings')
-    if type(tokens_tags).isinstance(list):
+    if type(tokens_tags) != type(['list']):
         raise TypeError('tokens_tags should be a list')
     if set([type(b) for b in tokens_tags]) != set([type('String')]):
         raise TypeError('tokens_tags should be a list of strings')

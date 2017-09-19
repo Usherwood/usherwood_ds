@@ -60,7 +60,10 @@ def check_trailing_characters(token):
     :param token: token to be checked before being stemmed
     """
 
-    if re.findall(r'[^\w\s]| ', token[-1]) is not []:
-        warnings.warn('token ends with punctuation and/or white spaces and as such will not be properly stemmed')
+    if token is '':
+        pass
+    else:
+        if re.findall(r'[^\w\s]| ', token[-1]) is not []:
+            warnings.warn('token ends with punctuation and/or white spaces and as such will not be properly stemmed')
 
     return True
