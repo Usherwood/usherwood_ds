@@ -2,7 +2,7 @@
 
 """Run the age classifier (for use on AWS)"""
 
-from main.neural_networks.conv_net_applications import AgeClassifier
+from main.neural_networks.run_script_examples.conv_net_applications import AgeClassifier
 
 __author__ = "Peter J Usherwood"
 __python_version__ = "3.6"

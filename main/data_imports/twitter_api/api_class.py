@@ -18,11 +18,11 @@ from tweepy import Stream
 from requests.exceptions import Timeout, ConnectionError
 import ssl
 
-from main.data_imports.twitter_import import TwitterTextMention, TwitterUser
-from main.data_imports.unified_import import TextMention, User
+from main.data_imports.import_classes.twitter_classes import TwitterTextMention, TwitterUser
+from main.data_imports.import_classes.common_classes import TextMention, User
 
 
-with open(os.path.join(os.path.dirname(__file__), "../../api_credentials.json"),'r') as openfile:
+with open(os.path.join(os.path.dirname(__file__), "../api_credentials.json"),'r') as openfile:
     api_credentials = json.load(openfile)
 
 
