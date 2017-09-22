@@ -60,7 +60,9 @@ def encoded_to_bycat_counts(df_encoded,
                             cross_col_indicator='c_',
                             prediction=True,
                             include_sentiment=True,
-                            sentiment_column_key='Sentiment'):
+                            sentiment_column_key='Sentiment',
+                            categorical_sentiment=True,
+                            date_column_key='Date (Local)'):
     """
     Transform a standard encoded file into a bycat (by category) file
 
@@ -84,6 +86,12 @@ def encoded_to_bycat_counts(df_encoded,
 
     if include_sentiment:
         cross_cols += [sentiment_column_key]
+        if categorical_sentiment:
+            sents = pd.get_dummies(df_encoded[sentiment_column_key])
+            for col in sents.columns:
+                sents.rename(columns={col:'Sentiment ' + str(col)}, inplace=True)
+                cross_cols += ['Sentiment ' + str(col)]
+            df_encoded = pd.concat([df_encoded, sents], axis=1)
 
     df_cross = df_encoded[tax_cols+cross_cols]
 
@@ -95,13 +103,13 @@ def encoded_to_bycat_counts(df_encoded,
     bycat_counts.insert(0, 'Volume', value=counts)
 
     if prediction:
-        df_encoded.index = pd.to_datetime(df_encoded['Date'])
+        df_encoded.index = pd.to_datetime(df_encoded[date_column_key])
         df_encoded['Volume'] = 1
 
         dvolumedts = []
         dsentimentdts = []
         for tax in tax_cols:
-            sub = df_encoded[df_encoded[tax] == 1].ix[:, ['Date', 'Volume', sentiment_column_key]]
+            sub = df_encoded[df_encoded[tax] == 1].ix[:, [date_column_key, 'Volume', sentiment_column_key]]
 
             sent = sub.resample('W').mean()[sentiment_column_key]\
                 .fillna(sub.resample('W').mean()[sentiment_column_key].mean())
