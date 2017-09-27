@@ -5,7 +5,6 @@
 __author__ = "Peter J Usherwood"
 __python_version__ = "3.5"
 
-from main.data_imports.unified_import import TextMention, User
 import pandas as pd
 
 
