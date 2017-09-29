@@ -27,7 +27,7 @@ def domains_to_binary(df_encoded, domain_column_key='Domain', num_domains=10):
 
     df_encoded = pd.concat([df_encoded,domains_df], axis=1)
 
-    return df_encoded
+    return True
 
 
 def date_to_binary_tod(pd_datetime, lower_hour=0, lower_minute=0, upper_hour=23, upper_minute=0):

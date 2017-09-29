@@ -43,10 +43,12 @@ class NeuralNetwork:
             self.m += [np.random.normal(0, pow(self.hnodes[i], -.5), (self.hnodes[i], self.hnodes[i - 1]))]
         self.m += [np.random.normal(0, pow(self.onodes, -.5), (self.onodes, self.hnodes[-1]))]
 
+    @staticmethod
     def activation_function(self, inputs):
         output = np.array([[scipy.special.expit(value[0])] for value in inputs])
         return output
 
+    @staticmethod
     def inverse_activation_function(self, inputs):
         output = np.array([[scipy.special.logit(value[0])] for value in inputs])
         return output
