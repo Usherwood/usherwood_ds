@@ -8,6 +8,7 @@ import lasagne
 from lasagne import layers
 from lasagne.updates import nesterov_momentum
 from nolearn.lasagne import NeuralNet
+import progressbar
 
 __author__ = "Peter J Usherwood"
 __python_version__ = "3.6"
@@ -78,20 +79,28 @@ class AgeClassifier:
         )
 
     def train_from_disk(self,
-                        path_to_training_data='../../../data_sets/face_ages/group_cropped_and_flipped/training_chunks/'):
+                        path_to_training_data='E:/data_sets/face_ages/group_cropped_and_flipped/training_chunks/',
+                        save_every_x=10,
+                        n_chunks=50):
         """
         Train net in chunks using data on hdd
 
         :param path_to_training_data: Path to a folder containing training data named "train_Xi" and "train_Yi"
         """
 
-        for i in range(1, int(len(
-                os.listdir(path_to_training_data)) / 2) + 1):
-            train_x = np.load(
-                path_to_training_data + 'train_X' + str(i) + '.npy')
-            train_y = np.load(
-                path_to_training_data + 'train_Y' + str(i) + '.npy')
-            nn = self.net.fit(train_x, train_y)
-            nn.save_weights_to('age_model' + str(i))
+        if n_chunks == -1:
+            n_chunks = int(len(os.listdir(path_to_training_data)) / 2)
+
+        with progressbar.ProgressBar(max_value=n_chunks) as bar:
+            for i in range(1, n_chunks + 1):
+                train_x = np.load(
+                    path_to_training_data + 'train_X' + str(i) + '.npy')
+                train_y = np.load(
+                    path_to_training_data + 'train_Y' + str(i) + '.npy')
+                nn = self.net.fit(train_x, train_y)
+                if i%save_every_x == 0:
+                    print('Saving')
+                    nn.save_weights_to('age_model')
+                bar.update(i)
 
         return True
