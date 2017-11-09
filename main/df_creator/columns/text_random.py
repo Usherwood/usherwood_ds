@@ -89,7 +89,12 @@ class TextRandom:
         gen_words = []
         while w2 not in ['.', '?', '!']:
             gen_words.append(w1)
-            w1, w2 = w2, random.choice(self.cache[(w1, w2)])
+            try:
+                w1, w2 = w2, random.choice(self.cache[(w1, w2)])
+            except KeyError:
+                print((w1, w2))
+                gen_words = gen_words[:-1]
+                self.cache.pop((w1, w2), None)
 
         gen_words.append(w2)
 
