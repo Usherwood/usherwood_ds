@@ -27,7 +27,7 @@ def domains_to_binary(df_encoded, domain_column_key='Domain', num_domains=10):
 
     df_encoded = pd.concat([df_encoded,domains_df], axis=1)
 
-    return True
+    return df_encoded
 
 
 def date_to_binary_tod(pd_datetime, lower_hour=0, lower_minute=0, upper_hour=23, upper_minute=0):
@@ -62,7 +62,8 @@ def encoded_to_bycat_counts(df_encoded,
                             include_sentiment=True,
                             sentiment_column_key='Sentiment',
                             categorical_sentiment=True,
-                            date_column_key='Date (Local)'):
+                            date_column_key='Date (Local)',
+                            manual_range=pd.date_range('2015-10-31', '2017-11-01')):
     """
     Transform a standard encoded file into a bycat (by category) file
 
@@ -72,6 +73,11 @@ def encoded_to_bycat_counts(df_encoded,
     :param prediction: Bool, if True adds dVolumedt and dSentimentdt values
     :param include_sentiment: Bool, include the sentiment column as a cross sectional column
     :param sentiment_column_key: String, the name of the sentiment column
+    :param categorical_sentiment: Bool, Create dummy variables for the sentiment (one hot encoding)
+    :param date_column_key: String, name of the date column to use
+    :param manual_range: pandas date range, manually specify the domain for prediction, this is vital if you are
+    splitting a big data set in half as keeping the range constant allows the derivatives to be summed. E.g.
+    bycat1 + bycat2 = bycat_total
 
     :return: bycat_counts df with the taxonomy as rows and counts of the cross sectional variables as columns
     """
@@ -110,11 +116,21 @@ def encoded_to_bycat_counts(df_encoded,
         dsentimentdts = []
         for tax in tax_cols:
             sub = df_encoded[df_encoded[tax] == 1].ix[:, [date_column_key, 'Volume', sentiment_column_key]]
+            if manual_range is not None:
+                df2 = pd.DataFrame(0, index=manual_range, columns=['Volume'])
+                df2[date_column_key] = df2.index
+                df2[sentiment_column_key] = 0
+                df_encoded['Volume'] = 1
+                sub = sub.combine_first(df2)
 
-            sent = sub.resample('W').mean()[sentiment_column_key]\
-                .fillna(sub.resample('W').mean()[sentiment_column_key].mean())
+            #sent = sub.resample('W').mean()[sentiment_column_key]\
+            #    .fillna(sub.resample('W').mean()[sentiment_column_key].mean())
 
-            volume = sub.resample('W').sum()['Volume'].fillna(sub.resample('W').sum()['Volume'].mean())
+            #volume = sub.resample('W').sum()['Volume'].fillna(sub.resample('W').sum()['Volume'].mean())
+
+            sent = sub.resample('W').sum()[sentiment_column_key].fillna(0)
+
+            volume = sub.resample('W').sum()['Volume'].fillna(0)
 
             x = np.arange(len(volume))
 

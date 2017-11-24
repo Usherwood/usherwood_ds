@@ -47,7 +47,7 @@ def opportunities(ax, category_names, volumes, opportunity_scores, tertiary=None
             if x < labels_min_vol:
                 pass
             else:
-                ax.text(x, y + np.random.standard_normal(1)*.05, s, size=font_size, color='k')
+                ax.text(x, y, s, size=font_size, color='k')# + np.random.standard_normal(1)*.05
 
     if tertiary is None:
         ax.scatter(volumes, opportunity_scores, s=volumes*bubble_scale, c=colour, lw=0)
