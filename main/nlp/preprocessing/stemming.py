@@ -14,41 +14,55 @@ __author__ = "Peter J Usherwood"
 __python_version__ = "3.5"
 
 
-def stem_text(text_string=None, tokens=None, pos_tuples=False, language='english'):
-    """
-    Function that stems a text string using the NLTK snowball stemmer
+class Stemmer():
 
-    :param text_string: Python string object to be tokenized and stemmed
-    :param tokens: Python list of strings already tokenized
-    :param pos_tuples: Bool, if tokens are a list of pos_tuples set this to true
-    :param language: String representing the language to be used
+    def __init__(self, language='english'):
+        """
+        :param language: String representing the language to be used
+        """
 
-    :return: String comparable to the input but with all words stemmed.
-    """
+        self.stemmer = None
 
-    try:
-        stemmer = SnowballStemmer(language)
-    except ValueError as e:
-        print('Invalid language supplied to the stemmer, please choose from: ' + " ".join(SnowballStemmer.languages) +
-              '\nOr add a new stemmer to the repository ;)')
+        try:
+            self.stemmer = SnowballStemmer(language)
+        except ValueError as e:
+            print(
+                'Invalid language supplied to the stemmer, please choose from: ' + " ".join(SnowballStemmer.languages) +
+                '\nOr add a new stemmer to the repository ;)')
 
-    if tokens is None:
-        tokens = []
-    if text_string is not None:
-        tokens = tokenizer_word(text_string)
-        [check_trailing_characters(token) for token in tokens]
-        tokens = [stemmer.stem(token) for token in tokens]
-        stemmed = " ".join(tokens)
-    elif pos_tuples:
-        tokens, tokens_tags = tokenizer_pos(tokens)
-        [check_trailing_characters(token) for token in tokens]
-        tokens = [stemmer.stem(token) for token in tokens]
-        stemmed = de_tokenizer_pos(tokens, tokens_tags)
-    else:
-        [check_trailing_characters(token) for token in tokens]
-        stemmed = [stemmer.stem(token) for token in tokens]
 
-    return stemmed
+    def stem_text(self, text_string=None, tokens=None, pos_tuples=False, check_trailing=True):
+        """
+        Function that stems a text string using the NLTK snowball stemmer
+
+        :param text_string: Python string object to be tokenized and stemmed
+        :param tokens: Python list of strings already tokenized
+        :param pos_tuples: Bool, if tokens are a list of pos_tuples set this to true
+
+        :return: String comparable to the input but with all words stemmed.
+        """
+
+
+        if tokens is None:
+            tokens = []
+        if text_string is not None:
+            tokens = tokenizer_word(text_string)
+            if check_trailing:
+                [check_trailing_characters(token) for token in tokens]
+            tokens = [self.stemmer.stem(token) for token in tokens]
+            stemmed = " ".join(tokens)
+        elif pos_tuples:
+            tokens, tokens_tags = tokenizer_pos(tokens)
+            if check_trailing:
+                [check_trailing_characters(token) for token in tokens]
+            tokens = [self.stemmer.stem(token) for token in tokens]
+            stemmed = de_tokenizer_pos(tokens, tokens_tags)
+        else:
+            if check_trailing:
+                [check_trailing_characters(token) for token in tokens]
+            stemmed = [self.stemmer.stem(token) for token in tokens]
+
+        return stemmed
 
 
 def check_trailing_characters(token):

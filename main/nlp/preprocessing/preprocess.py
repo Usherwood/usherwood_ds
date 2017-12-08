@@ -6,6 +6,8 @@ functions separately"""
 from main.nlp.processing.stopwords import stopword_removal
 from main.nlp.preprocessing.cleaning import clean_text
 from main.nlp.preprocessing.stemming import stem_text
+from main.nlp.preprocessing.social_feature_extraction import extract_hashtags, \
+    extract_mentioned_users, extract_urls
 
 __author__ = "Peter J Usherwood"
 __python_version__ = "3.5"
@@ -16,6 +18,9 @@ def preprocess_df(data,
                   language='english',
                   additional_list=[],
                   adhoc_stopwords=[],
+                  remove_hashtag_words=False,
+                  remove_mentioned_authors=True,
+                  remove_urls=True,
                   stopped_not_stemmed=False,
                   pos_tuples=False):
     """
@@ -26,6 +31,9 @@ def preprocess_df(data,
     :param language: Primary language (see stopwords/stemming)
     :param additional_list: List of additional pre set stopwords (see stopwords)
     :param adhoc_stopwords: List of adhoc stopwords (see stopwords)
+    :param remove_hashtag_words: Bool, remove the words that appear as hashtags
+    :param remove_mentioned_authors: Bool, remove the at mentioned authors
+    :param remove_urls: Bool, remove urls
     :param stopped_not_stemmed: Return a field of cleaned and stopword removed text, useful for the categorizer
     :param pos_tuples: Bool, if tokens are a list of pos_tuples set this to true
 
@@ -33,13 +41,35 @@ def preprocess_df(data,
     """
 
     if not pos_tuples:
-        data['Original'] = data.ix[:, text_field_key]
+        data['Cleaned'] = data.ix[:, text_field_key]
         print('Loaded')
-        data['Cleaned'] = data.ix[:, text_field_key].apply(lambda e: clean_text(text_string=e))
+
+        if remove_hashtag_words:
+            data['Cleaned'] = data.ix[:, 'Cleaned'].apply(lambda e: extract_hashtags(text_string=e,
+                                                                                     remove_hashtags=True)[0])
+        if remove_mentioned_authors:
+            data['Cleaned'] = data.ix[:, 'Cleaned'].apply(lambda e: extract_mentioned_users(text_string=e,
+                                                                                            remove_users=True)[0])
+        if remove_urls:
+            print('url remover not built')
+            remove_urls=False
+
+        data['Hashtags'] = data.ix[:, 'Cleaned'].apply(lambda e: extract_hashtags(text_string=e,
+                                                                                 remove_hashtags=False)[1])
+        data['At Mentions'] = data.ix[:, 'Cleaned'].apply(lambda e: extract_mentioned_users(text_string=e,
+                                                                                        remove_users=False)[1])
+
+        print('Removed social features. Hashtags:', str(remove_hashtag_words),
+              'At Mentions:', str(remove_mentioned_authors),
+              'URLs:', str(remove_urls))
+
+        data['Cleaned'] = data.ix[:, 'Cleaned'].apply(lambda e: clean_text(text_string=e))
         print('Cleaned Text')
+
         data['Stemmed'] = data.ix[:, 'Cleaned'].apply(lambda e: stem_text(text_string=e, language=language))
         print('Stemmed Text')
-        data[text_field_key] = data.ix[:, 'Stemmed'].apply(lambda e: stopword_removal(text_string=e,
+
+        data['Preprocessed'] = data.ix[:, 'Stemmed'].apply(lambda e: stopword_removal(text_string=e,
                                                                                       language=language,
                                                                                       additional_language_list=
                                                                                       additional_list,
@@ -54,13 +84,15 @@ def preprocess_df(data,
                                                                                      adhoc_list=adhoc_stopwords))
             print('Stopped not Stemmed')
     else:
-        data['Original'] = data.ix[:, text_field_key]
         print('Loaded')
+
         data['Cleaned'] = data.ix[:, text_field_key].apply(lambda e: clean_text(tokens=e, pos_tuples=True))
         print('Cleaned Text')
+
         data['Stemmed'] = data.ix[:, 'Cleaned'].apply(lambda e: stem_text(tokens=e, language=language, pos_tuples=True))
         print('Stemmed Text')
-        data[text_field_key] = data.ix[:, 'Stemmed'].apply(lambda e: stopword_removal(tokens=e,
+
+        data['Preprocessed'] = data.ix[:, 'Stemmed'].apply(lambda e: stopword_removal(tokens=e,
                                                                                       pos_tuples=True,
                                                                                       language=language,
                                                                                       additional_language_list=
