@@ -2,7 +2,7 @@
 
 """Run the age classifier (for use on AWS)"""
 
-from main.neural_networks.projects.facial_recognition import AgeClassifier
+from main.neural_networks.projects.convolutional.profile_picture_demographics import AgeClassifier
 
 __author__ = "Peter J Usherwood"
 __python_version__ = "3.6"
