@@ -28,6 +28,7 @@ def tokenizer_word(text_string, keep_phrases=False):
 
     return tokens
 
+
 def tokenizer_sentence(text_string):
     """
     Tokenizer that tokenizes a string of text into sentences

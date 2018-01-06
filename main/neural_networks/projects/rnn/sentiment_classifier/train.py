@@ -64,7 +64,7 @@ class NNSentimentTrain:
             self.lstm_units = 64
 
             lstmCell = tf.contrib.rnn.BasicLSTMCell(self.lstm_units)
-            lstmCell = tf.contrib.rnn.DropoutWrapper(cell=lstmCell, output_keep_prob=1)
+            lstmCell = tf.contrib.rnn.DropoutWrapper(cell=lstmCell, output_keep_prob=.5)
             value, _ = tf.nn.dynamic_rnn(lstmCell, self.X, dtype=tf.float32)
 
             weight = tf.Variable(tf.truncated_normal([self.lstm_units, self.n_classes]))

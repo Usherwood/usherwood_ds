@@ -49,8 +49,7 @@ def create_twitter_user_df(twitter_user_list):
 
     twitter_users_df = pd.DataFrame(user_lists, columns=['Twitter Author ID', 'Domain', 'Source', 'Full Name',
                                                          'Username', 'Bio', 'Profile Picture URL', 'Follower Count',
-                                                         'Profile Picture', 'Verified', 'Number of Statuses',
-                                                         'Date Created', 'Author ID'])
+                                                         'Verified', 'Number of Statuses', 'Date Created', 'Author ID'])
 
     twitter_users_df = twitter_users_df.drop_duplicates(subset=['Twitter Author ID'])
 
@@ -76,13 +75,13 @@ def create_twitter_mention_df(twitter_mention_list):
                                                                'Date (GMT)', 'Date (Local)', 'Date (Local - Zone)',
                                                                'Snippet', 'Sentiment', 'Location', 'Long', 'Lat',
                                                                'Retweet Count', 'Favorite Count', 'Device', 'ID',
-                                                               'ImageURL', 'is Retweet','ID of Reweet',
+                                                               'Image URL', 'is Retweet', 'ID of Reweet',
                                                                'ID of Original Tweet Author',
                                                                'Screen Name of Original Tweet Author',
-                                                               'is Response','ID of Antecedent Tweet',
+                                                               'is Response', 'ID of Antecedent Tweet',
                                                                'ID of Antecedent Author',
                                                                'Screen Name of Antecedent Author',
-                                                               'is Quoting','ID of Quoted Tweet',
+                                                               'is Quoting', 'ID of Quoted Tweet',
                                                                'ID of Quoted Author',
                                                                'Screen Name of Quoted Author'])
 

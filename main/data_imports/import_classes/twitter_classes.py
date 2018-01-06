@@ -14,7 +14,6 @@ class TwitterUser(User):
 
         self.twitter_author_id = None
         self.followers_count = None
-        self.profile_image_full = None
         self.verified = None
         self.number_of_statuses = None
         self.created_at = None
@@ -27,7 +26,7 @@ class TwitterUser(User):
         """
 
         list_form = [self.twitter_author_id, self.domain, self.source, self.author_fullname, self.author_username,
-                     self.bio, self.profilepictureurl, self.followers_count, self.profile_image_full, self.verified,
+                     self.bio, self.profilepictureurl, self.followers_count, self.verified,
                      self.number_of_statuses, self.created_at, self.author_id]
 
         return list_form
