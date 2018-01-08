@@ -15,7 +15,7 @@ from main.data_imports.import_classes.youtube_classes import YoutubeTextComment,
 from main.data_imports.import_classes.common_classes import User
 
 
-with open(os.path.join(os.path.dirname(os.path.realpath(__file__)),"../../api_credentials.json"), 'r') as openfile:
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../api_credentials.json"), 'r') as openfile:
     api_credentials = json.load(openfile)
 
 

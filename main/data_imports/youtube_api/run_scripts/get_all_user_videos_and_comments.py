@@ -7,18 +7,61 @@ __author__ = "Peter J Usherwood"
 __python_version__ = "3.5"
 
 import pandas as pd
+import os
 
-from youtube.api_class import YoutubeAPI
-from youtube.to_pandas import create_youtube_video_df, create_youtube_comment_df
-
-youtube_author_id = 'UCa1yUHQmV6Z0PpAUtfgNd9g'
-save_path = 'C:/Users/usherwoodp/Documents/projects/'
-video_comment_filter_max_comment_count = -1
-video_comment_filter_start_date = '2016-11-01' #yyyy-mm-dd
-video_comment_filter_end_date = '2017-02-28' #yyyy-mm-dd
+from main.data_imports.youtube_api.api_class import YoutubeAPI
+from main.data_imports.youtube_import import create_youtube_video_df, create_youtube_comment_df
 
 
-api = YoutubeAPI()
+def get_all_user_videos_and_comments(youtube_author_id='UCa1yUHQmV6Z0PpAUtfgNd9g',
+                                     video_comment_filter_max_comment_count=-1,
+                                     video_comment_filter_start_date='2016-11-01', #yyyy-mm-dd
+                                     video_comment_filter_end_date='2017-02-28', #yyyy-mm-dd
+                                     root_dir='D:/documents/work/projects/api_data/'):
+    api = YoutubeAPI()
+
+    print(youtube_author_id)
+    print(video_comment_filter_max_comment_count)
+    print(video_comment_filter_start_date)
+    print(video_comment_filter_end_date)
+
+    # Get all video ids for a user
+    video_ids = get_user_video_ids(api,
+                                   youtube_author_id)
+
+    # Fortify all videos
+    video_jsons = []
+    for video_id in video_ids:
+        video_jsons += [api.fortify_video(video_id)]
+
+    parsed_videos = []
+    for video in video_jsons:
+        parsed_videos += [api.parse_video_to_youtube_video(video)]
+
+    df_video = create_youtube_video_df(parsed_videos)
+
+    df_video['Comments Found'] = 'Searching'
+
+    df_video.ix[(df_video['Publish Date'] < video_comment_filter_start_date)|
+                (df_video['Publish Date'] > video_comment_filter_end_date),'Comments Found'] = 'Out of Date Range'
+
+    df_video.ix[df_video['Publish Date'].apply(lambda e: str(e)) == 'NaT', 'Comments Found'] = 'Video Unavailable'
+
+    comment_pages = create_comment_pages(api,
+                                         df_video,
+                                         video_comment_filter_max_comment_count)
+
+    make_summary_excel(videos_df=df_video,
+                       comment_pages=comment_pages,
+                       save_path=os.path.join(root_dir,'downloads/'),
+                       youtube_author_id=youtube_author_id,
+                       video_comment_filter_start_date=video_comment_filter_start_date,
+                       video_comment_filter_end_date=video_comment_filter_end_date)
+
+    filename = 'downloads/campaign_summary_author=' + str(youtube_author_id) + '_range_' \
+     + str(video_comment_filter_start_date) + '_to_' + str(video_comment_filter_end_date) + '.xlsx'
+
+    return filename
 
 
 def get_user_video_ids(api, youtube_author_id):
@@ -84,7 +127,13 @@ def create_comment_pages(api,
     return comment_pages
 
 
-def make_summary_excel(videos_df, comment_pages):
+def make_summary_excel(videos_df,
+                       comment_pages,
+                       save_path,
+                       youtube_author_id,
+                       video_comment_filter_start_date,
+                       video_comment_filter_end_date):
+
     writer = pd.ExcelWriter(save_path +
                             'campaign_summary_author=' +
                             str(youtube_author_id) + '_range_' +
@@ -102,31 +151,6 @@ def make_summary_excel(videos_df, comment_pages):
 
     return True
 
-# Get all video ids for a user
-video_ids = get_user_video_ids(api,
-                               youtube_author_id)
 
-# Fortify all videos
-video_jsons = []
-for video_id in video_ids:
-    video_jsons += [api.fortify_video(video_id)]
-
-parsed_videos = []
-for video in video_jsons:
-    parsed_videos += [api.parse_video_to_youtube_video(video)]
-
-df_video = create_youtube_video_df(parsed_videos)
-
-df_video['Comments Found'] = 'Searching'
-
-df_video.ix[(df_video['Publish Date'] < video_comment_filter_start_date)|
-            (df_video['Publish Date'] > video_comment_filter_end_date),'Comments Found'] = 'Out of Date Range'
-
-df_video.ix[df_video['Publish Date'].apply(lambda e: str(e)) == 'NaT', 'Comments Found'] = 'Video Unavailable'
-
-comment_pages = create_comment_pages(api,
-                                     df_video,
-                                     video_comment_filter_max_comment_count)
-
-make_summary_excel(df_video,
-                   comment_pages)
+if __name__ == "__main__":
+    get_all_user_videos_and_comments()

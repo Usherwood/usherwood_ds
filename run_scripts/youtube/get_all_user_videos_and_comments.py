@@ -8,8 +8,8 @@ __python_version__ = "3.5"
 
 import pandas as pd
 
-from main.data_imports.youtube_api.utils.api_class import YoutubeAPI
-from main.data_imports.youtube_api.utils.to_pandas import create_youtube_video_df, create_youtube_comment_df
+from main.data_imports.youtube_api.api_class import YoutubeAPI
+from main.data_imports.youtube_import import create_youtube_video_df, create_youtube_comment_df
 
 youtube_author_id = 'UCa1yUHQmV6Z0PpAUtfgNd9g'
 save_path = 'C:/Users/usherwoodp/Documents/projects/'
