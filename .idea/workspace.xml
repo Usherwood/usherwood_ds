@@ -2,19 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1b2833d-7c8b-4b85-ab19-e5d1470999f4" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/main/data_imports/youtube_api/__init__.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/main/data_imports/reddit_api/run_scripts/search_comments_to_excel.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/api_credentials.json" afterPath="$PROJECT_DIR$/main/data_imports/api_credentials.json" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/get_all_user_videos_and_comments.py" afterPath="$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/get_all_user_videos_and_comments.py" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/video_comments_to_csv.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/video_query_to_csv.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/youtube_api/utils/__init__.py" afterPath="$PROJECT_DIR$/main/data_imports/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/youtube_api/utils/api_class.py" afterPath="$PROJECT_DIR$/main/data_imports/youtube_api/api_class.py" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/youtube_api/utils/to_pandas.py" afterPath="$PROJECT_DIR$/main/data_imports/youtube_import.py" />
-      <change beforePath="$PROJECT_DIR$/run_scripts/youtube/get_all_user_videos_and_comments.py" afterPath="$PROJECT_DIR$/run_scripts/youtube/get_all_user_videos_and_comments.py" />
-      <change beforePath="$PROJECT_DIR$/run_scripts/youtube/video_comments_to_csv.py" afterPath="$PROJECT_DIR$/run_scripts/youtube/video_comments_to_csv.py" />
-      <change beforePath="$PROJECT_DIR$/run_scripts/youtube/video_query_to_csv.py" afterPath="$PROJECT_DIR$/run_scripts/youtube/video_query_to_csv.py" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
+      <change beforePath="$PROJECT_DIR$/run_scripts/youtube/__init__.py" afterPath="$PROJECT_DIR$/main/data_imports/reddit_api/run_scripts/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/run_scripts/youtube/get_all_user_videos_and_comments.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/run_scripts/youtube/video_comments_to_csv.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/run_scripts/youtube/video_query_to_csv.py" afterPath="" />
     </list>
     <ignored path="usherwood_ds.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,35 +27,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="get_all_user_videos_and_comments.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/get_all_user_videos_and_comments.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
-              <folding>
-                <element signature="e#207#226#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="api_class.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/data_imports/youtube_api/api_class.py">
+        <entry file="file://$PROJECT_DIR$/main/data_imports/reddit_api/api_class.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="17" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+            <state relative-caret-position="-170">
+              <caret line="20" column="16" lean-forward="true" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
               <folding>
-                <element signature="e#157#168#0" expanded="true" />
+                <element signature="e#125#136#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="api_credentials.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/data_imports/api_credentials.json">
+      <file leaf-file-name="search_comments_to_excel.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/data_imports/reddit_api/run_scripts/search_comments_to_excel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="278">
+              <caret line="29" column="17" lean-forward="true" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
+              <folding>
+                <element signature="e#178#189#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" column="71" lean-forward="false" selection-start-line="9" selection-start-column="71" selection-end-line="9" selection-end-column="71" />
+              <caret line="9" column="8" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -95,7 +89,6 @@
         <option value="$PROJECT_DIR$/fantasy_football/imports/premier_league_official.py" />
         <option value="$PROJECT_DIR$/main/neural_networks/projects/facial_recognition.py" />
         <option value="$PROJECT_DIR$/main/neural_networks/projects/convolutional/profile_picture_demographics/run.py" />
-        <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/main/neural_networks/projects/rnn/sentiment_classifier/preprocess_movies_training_data.py" />
         <option value="$PROJECT_DIR$/main/nlp/preprocessing/tokenizer.py" />
         <option value="$PROJECT_DIR$/main/neural_networks/projects/rnn/sentiment_classifier/train.py" />
@@ -107,10 +100,13 @@
         <option value="$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/video_query_to_excel.py" />
         <option value="$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/video_comments_to_excel.py" />
         <option value="$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/get_all_user_videos_and_comments.py" />
+        <option value="$PROJECT_DIR$/main/data_imports/reddit_api/api_class.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/main/data_imports/reddit_api/run_scripts/search_comments_to_excel.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="559" />
     <option name="y" value="-16" />
     <option name="width" value="1936" />
@@ -154,6 +150,35 @@
               <item name="usherwood_ds" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="data_imports" type="462c0819:PsiDirectoryNode" />
+              <item name="import_classes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="usherwood_ds" type="b2602c69:ProjectViewProjectNode" />
+              <item name="usherwood_ds" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="data_imports" type="462c0819:PsiDirectoryNode" />
+              <item name="reddit_api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="usherwood_ds" type="b2602c69:ProjectViewProjectNode" />
+              <item name="usherwood_ds" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="data_imports" type="462c0819:PsiDirectoryNode" />
+              <item name="reddit_api" type="462c0819:PsiDirectoryNode" />
+              <item name="run_scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="usherwood_ds" type="b2602c69:ProjectViewProjectNode" />
+              <item name="usherwood_ds" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="data_imports" type="462c0819:PsiDirectoryNode" />
+              <item name="twitter_api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="usherwood_ds" type="b2602c69:ProjectViewProjectNode" />
+              <item name="usherwood_ds" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="data_imports" type="462c0819:PsiDirectoryNode" />
               <item name="youtube_api" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -182,6 +207,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\documents\work\bibliotecas\usherwood_ds\main\data_imports\reddit_api\run_scripts" />
       <recent name="D:\documents\work\bibliotecas\usherwood_ds\main\neural_networks\projects\rnn\sentiment_classifier" />
       <recent name="C:\Users\Peter\Documents\Programming\usherwood_ds" />
     </key>
@@ -205,7 +231,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.get_all_user_videos_and_comments">
+  <component name="RunManager" selected="Python.search_comments_to_excel">
     <configuration name="get_all_user_videos_and_comments" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -237,6 +263,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="usherwood_ds" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/fantasy_football/imports/premier_league_official.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="search_comments_to_excel" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/main/data_imports/reddit_api/run_scripts" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="usherwood_ds" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main/data_imports/reddit_api/run_scripts/search_comments_to_excel.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -412,18 +456,20 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.premier_league_official" />
       <item index="1" class="java.lang.String" itemvalue="Python.video_query_to_excel" />
       <item index="2" class="java.lang.String" itemvalue="Python.video_comments_to_excel" />
       <item index="3" class="java.lang.String" itemvalue="Python.get_all_user_videos_and_comments" />
+      <item index="4" class="java.lang.String" itemvalue="Python.search_comments_to_excel" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.get_all_user_videos_and_comments" />
-        <item index="1" class="java.lang.String" itemvalue="Python.video_comments_to_excel" />
-        <item index="2" class="java.lang.String" itemvalue="Python.video_query_to_excel" />
-        <item index="3" class="java.lang.String" itemvalue="Python.premier_league_official" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.search_comments_to_excel" />
+        <item index="1" class="java.lang.String" itemvalue="Python.get_all_user_videos_and_comments" />
+        <item index="2" class="java.lang.String" itemvalue="Python.video_comments_to_excel" />
+        <item index="3" class="java.lang.String" itemvalue="Python.video_query_to_excel" />
+        <item index="4" class="java.lang.String" itemvalue="Python.premier_league_official" />
       </list>
     </recent_temporary>
   </component>
@@ -444,7 +490,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18229167" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -476,14 +522,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/data_imports/twitter_api/api_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/nlp/preprocessing/tokenizer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -645,13 +683,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="5" lean-forward="false" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/nlp/preprocessing/tokenizer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -691,14 +722,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/data_imports/twitter_api/api_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -750,22 +773,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/data_imports/youtube_api/api_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="17" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-          <folding>
-            <element signature="e#157#168#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/video_query_to_excel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="16" column="34" lean-forward="true" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="72" />
           <folding>
-            <element signature="e#174#183#0" expanded="true" />
+            <element signature="e#174#183#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -786,12 +799,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main/data_imports/unified_import.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/get_all_user_videos_and_comments.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+          <caret line="20" column="22" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
           <folding>
-            <element signature="e#207#226#0" expanded="true" />
+            <element signature="e#207#226#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/data_imports/youtube_api/api_class.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1354">
+          <caret line="21" column="17" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+          <folding>
+            <element signature="e#157#168#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/data_imports/twitter_api/api_class.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-850">
+          <caret line="258" column="33" lean-forward="true" selection-start-line="258" selection-start-column="33" selection-end-line="258" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/data_imports/reddit_api/api_class.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-170">
+          <caret line="20" column="16" lean-forward="true" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+          <folding>
+            <element signature="e#125#136#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="8" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/data_imports/reddit_api/run_scripts/search_comments_to_excel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="29" column="17" lean-forward="true" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
+          <folding>
+            <element signature="e#178#189#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -5,3 +5,6 @@ seaborn
 nltk
 gensim
 emoji
+praw
+tweepy
+progressbar2
