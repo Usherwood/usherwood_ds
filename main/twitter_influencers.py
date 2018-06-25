@@ -235,7 +235,7 @@ def get_amplification_influencers(TM_SIZE,
     :param TOP_X_CONNECTED: Int, take the top_x_connect influencers
     :param save_path: path of where save the dataframes to
     :param load_from_disk: Bool, load previously ran influencer sdata from disk
-    :param load_path: Str, path to the saved data if it is to be loaded, files must be named TM.csv and influencers.csv
+    :param load_path: Str, path to the saved data if it is to be loaded, files must be named TM.csv and Influencers.csv
     :param inc_tiers: Bool, divide rankings by number of followers
     :param tiers: List, ascending list of integers as the upper boundaries of follower numbers per tier, a final tier
     will be added for uses with more followers than your last divide
@@ -244,7 +244,7 @@ def get_amplification_influencers(TM_SIZE,
     """
 
     if load_from_disk:
-        influencers = pd.read_csv(load_path+'influencers.csv')
+        influencers = pd.read_csv(load_path+'Influencers.csv')
 
     influencers = influencers[:TOP_X_CONNECTED]
     influencers_jsons = api.fortify_twitter_users_batch(user_ids=influencers['Twitter Author ID'].values.tolist())
@@ -258,7 +258,7 @@ def get_amplification_influencers(TM_SIZE,
     influencers_fort['Twitter Author ID'] = influencers_fort['Twitter Author ID'].astype(np.int64)
     influencers = influencers_fort.merge(influencers, how='inner', on='Twitter Author ID')
     influencers['Amplification Index'] = influencers[['Follower Count', 'TM Amplification']].apply(
-        lambda x: (x[1] / TM_SIZE) * (TW_SIZE / x[0]), axis=1)
+        lambda x: (x[1] / TM_SIZE) * (TM_SIZE / x[0]), axis=1)
     influencers.sort_values(by='Amplification Index', inplace=True, ascending=False)
 
     influencers['Tier'] = 0

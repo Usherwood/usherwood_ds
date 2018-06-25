@@ -11,7 +11,7 @@ import time
 from datetime import datetime
 
 from apiclient.discovery import build
-from main.data_imports.import_classes.youtube_classes import YoutubeTextComment, YoutubeVideo
+from main.data_imports.import_classes.youtube_classes import YoutubeTextComment, YoutubeVideo, YoutubeUser
 from main.data_imports.import_classes.common_classes import User
 
 
@@ -26,6 +26,28 @@ class YoutubeAPI:
         self.developer_key = api_credentials["Youtube"]["developer_key"]
         self.api = build("youtube", "v3", developerKey=self.developer_key)
         self.wait_time = 0
+
+    def fortify_channel(self, channel_id=None, channel_name=None, fortify_with='snippet,statistics'):
+        """
+        Fortify a channel with the full json response
+
+        :param channel_id: Str, optional, youtube channel id
+        :param channel_name: Str, optional, youtube channel name
+        :param fortify_with: Str, the parts of the json to return
+
+        :return: Youtube channel json response
+        """
+
+        try:
+            response = self.api.channels().list(part=fortify_with, id=channel_id, forUsername=channel_name).execute()
+
+            video = response['items'][0]
+
+            return video
+
+        except Exception as e:
+            print('All parts not found for video, skipping')
+            return {'channel_id': channel_id, 'channel_name': channel_name, 'found':False}
 
     def fortify_video(self, video_id, fortify_with='snippet,contentDetails,statistics'):
         """
@@ -350,11 +372,41 @@ class YoutubeAPI:
 
         common_user = User()
 
-        common_user.author_id = 'youtube.com' + str(user['snippet']['channelId'])
+        common_user.author_id = 'youtube.com' + str(user['id'])
         common_user.domain = 'youtube.com'
         common_user.source = 'YoutubeAPI'
         common_user.author_fullname = None
         common_user.author_username = user['snippet']['title']
         common_user.bio = user['snippet']['description']
+        common_user.profilepictureurl = user['snippet']['thumbnails']['high']['url']
 
         return common_user
+
+
+    @staticmethod
+    def parse_user_to_youtube_user(user):
+        """
+        Creates a common user from a user (channel) object from the Youtube API
+
+        :param user: the Youtube json response
+
+        :return: YoutubeUser
+        """
+
+        youtube_user = YoutubeUser()
+
+        youtube_user.youtube_author_id = str(user['id'])
+        youtube_user.author_id = 'youtube.com' + str(user['id'])
+        youtube_user.domain = 'youtube.com'
+        youtube_user.source = 'YoutubeAPI'
+        youtube_user.author_fullname = None
+        youtube_user.author_username = user['snippet']['title']
+        youtube_user.bio = user['snippet']['description']
+        youtube_user.profilepictureurl = user['snippet']['thumbnails']['high']['url']
+        youtube_user.view_count = user['statistics']['viewCount']
+        youtube_user.comment_count = user['statistics']['commentCount']
+        youtube_user.subscriber_count = user['statistics']['subscriberCount']
+        youtube_user.hidden_subscriber_count = user['statistics']['hiddenSubscriberCount']
+        youtube_user.video_count = user['statistics']['videoCount']
+
+        return youtube_user
