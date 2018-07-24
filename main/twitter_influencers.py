@@ -18,15 +18,13 @@ from main.data_imports.twitter_import import create_twitter_user_df
 from main.data_imports.twitter_api.api_class import TwitterAPI
 
 
-TW_SIZE = 300000000
-
-
 def influencer_identification(handles,
                               save_path='',
                               TOP_X_CONNECTED=2000,
                               api_credentials=None,
                               inc_tiers=True,
-                              tiers=[1500,5000,20000,100000]):
+                              tiers=[1500,5000,20000,100000],
+                              TOP_X_PER_TIER=-1):
     """
     Run the analysis to find the top influential accounts on Twitter. This is the full influencer analysis, for a
     quicker insight run interests_identification.
@@ -38,10 +36,11 @@ def influencer_identification(handles,
     :param inc_tiers: Bool, divide rankings by number of followers
     :param tiers: List, ascending list of integers as the upper boundaries of follower numbers per tier, a final tier
     will be added for uses with more followers than your last divide
+    :param TOP_X_PER_TIER: int, keep only top x per influence tier, -1 is all, good for power BI
     """
 
     if api_credentials is None:
-        with open(os.path.join(os.path.dirname(__file__), "data_imports/api_credentials.json"), 'r') as openfile:
+        with open(os.path.join(os.path.dirname(__file__), "../api_credentials.json"), 'r') as openfile:
             api_credentials = json.load(openfile)
 
     api = TwitterAPI(api_credentials=api_credentials)
@@ -56,20 +55,19 @@ def influencer_identification(handles,
                                                 TM_SIZE=TM_SIZE,
                                                 TOP_X_CONNECTED=TOP_X_CONNECTED,
                                                 save_path=save_path,
-                                                inc_tiers=inc_tiers,
-                                                tiers=tiers)
+                                                tiers=tiers,
+                                                TOP_X_PER_TIER=TOP_X_PER_TIER)
     print('Calculating Engagement and overall influence')
     influencers = get_engagement_influencers(influencers=influencers,
                                              target_market=target_market,
                                              save_path=save_path,
-                                             inc_tiers=inc_tiers,
-                                             tiers=tiers)
+                                             TOP_X_PER_TIER=TOP_X_PER_TIER)
     print('Done')
 
     return target_market, influencers
 
 
-def interests_identification(handles, save_path='', TOP_X_CONNECTED=2000, api_credentials=None):
+def interests_identification(handles, save_path='', TOP_X_CONNECTED=2000, api_credentials=None, TOP_X_PER_TIER=-1):
     """
     Run the analysis to find the top amplifying accounts on Twitter, good for identifying interests or quick influencer
     analysis. For full influencer analysis use the influencers_identification function as it calculates
@@ -79,6 +77,7 @@ def interests_identification(handles, save_path='', TOP_X_CONNECTED=2000, api_cr
     :param save_path: path of where save the dataframes to
     :param TOP_X_CONNECTED: Int, take the top_x_connect influencers
     :param api_credentials: Dict, api credentials
+    :param TOP_X_PER_TIER: int, keep only top x per influence tier, -1 is all, good for power BI
     """
 
     if api_credentials is None:
@@ -96,7 +95,8 @@ def interests_identification(handles, save_path='', TOP_X_CONNECTED=2000, api_cr
                                                 api=api,
                                                 TM_SIZE=TM_SIZE,
                                                 TOP_X_CONNECTED=TOP_X_CONNECTED,
-                                                save_path=save_path)
+                                                save_path=save_path,
+                                                TOP_X_PER_TIER=TOP_X_PER_TIER)
     print('Done')
 
     return target_market, influencers
@@ -225,8 +225,8 @@ def get_amplification_influencers(TM_SIZE,
                                   influencers=None,
                                   load_from_disk=False,
                                   load_path='',
-                                  inc_tiers=True,
-                                  tiers=[1500,5000,20000,100000]):
+                                  tiers=[1500,5000,20000,100000],
+                                  TOP_X_PER_TIER=-1):
     """
     Fortify the influencers df for the top_x_connected influencers
 
@@ -236,9 +236,9 @@ def get_amplification_influencers(TM_SIZE,
     :param save_path: path of where save the dataframes to
     :param load_from_disk: Bool, load previously ran influencer sdata from disk
     :param load_path: Str, path to the saved data if it is to be loaded, files must be named TM.csv and Influencers.csv
-    :param inc_tiers: Bool, divide rankings by number of followers
     :param tiers: List, ascending list of integers as the upper boundaries of follower numbers per tier, a final tier
     will be added for uses with more followers than your last divide
+    :param TOP_X_PER_TIER: int, keep only top x per influence tier, -1 is all, good for power BI
 
     :return: partially populated influencers df
     """
@@ -264,17 +264,18 @@ def get_amplification_influencers(TM_SIZE,
     influencers['Tier'] = 0
     tiers = tiers.copy()
     tiers = [0]+tiers+[9999999999]
-    for tier_ix in range(len(tiers)-1):
-        sub = influencers[(influencers['Follower Count'] >= tiers[tier_ix])&
-                          (influencers['Follower Count'] < tiers[tier_ix+1])]
 
-        arr = sorted(sub['Amplification Index'].values)
-        influencers.ix[sub.index,'Amplification Index'] = sub['Amplification Index'].\
-            apply(lambda e: percentileofscore(arr, e)).values
-
-        influencers.ix[sub.index, 'Tier'] = tier_ix+1
-
+    influencers = apply_tiers(influencers, tiers)
+    influencers = run_indexing(influencers=influencers,
+                               base_column_name='Amplification Index',
+                               TOP_X_PER_TIER=-1,
+                               reindexed_column_name='Amplification Index')
+    influencers = run_indexing(influencers=influencers,
+                               base_column_name='Amplification Index',
+                               TOP_X_PER_TIER=TOP_X_PER_TIER,
+                               reindexed_column_name='Amplification Index PowerBI')
     influencers.reset_index(drop=True, inplace=True)
+    influencers['Channel'] = 'Twitter'
     influencers.to_csv(save_path+'Influencers.csv', encoding='utf-8', quoting=csv.QUOTE_ALL, index=False)
 
     return influencers
@@ -285,8 +286,7 @@ def get_engagement_influencers(target_market=None,
                                save_path='',
                                load_from_disk=False,
                                load_path='',
-                               inc_tiers=True,
-                               tiers=[1500, 5000, 20000, 100000]):
+                               TOP_X_PER_TIER=-1):
     """
     Fortify influencers df with amplification
 
@@ -295,9 +295,7 @@ def get_engagement_influencers(target_market=None,
     :param save_path: path of where save the dataframes to
     :param load_from_disk: Bool, load previously ran influencer sdata from disk
     :param load_path: Str, path to the saved data if it is to be loaded, files must be named TM.csv and influencers.csv
-    :param inc_tiers: Bool, divide rankings by number of followers
-    :param tiers: List, ascending list of integers as the upper boundaries of follower numbers per tier, a final tier
-    will be added for uses with more followers than your last divide
+    :param TOP_X_PER_TIER: int, keep only top x per influence tier, -1 is all, good for power BI
 
     :return: influencers df fortified with tm engagement and overall influence
     """
@@ -322,18 +320,46 @@ def get_engagement_influencers(target_market=None,
 
     influencers['Engagement Index'] = influencers['TM Engagement']/influencers['TM Amplification']
 
-    tiers = tiers.copy()
-    tiers = [0] + tiers + [9999999999]
+    influencers = run_indexing(influencers=influencers,
+                               base_column_name='Engagement Index',
+                               TOP_X_PER_TIER=-1,
+                               reindexed_column_name='Engagement Index')
+    influencers = run_indexing(influencers=influencers,
+                               base_column_name='Engagement Index',
+                               TOP_X_PER_TIER=TOP_X_PER_TIER,
+                               reindexed_column_name='Engagement Index PowerBI')
+
+    influencers['Influence Index'] = (influencers['Engagement Index']+influencers['Amplification Index'])/2.0
+    influencers['Influence Index PowerBI'] = (influencers['Engagement Index PowerBI']\
+                                              + influencers['Amplification Index PowerBI']) / 2.0
+
+    influencers.to_csv(save_path+'Influencers.csv', encoding='utf-8', quoting=csv.QUOTE_ALL, index=False)
+
+    return influencers
+
+
+def apply_tiers(influencers, tiers):
     for tier_ix in range(len(tiers) - 1):
         sub = influencers[(influencers['Follower Count'] >= tiers[tier_ix]) &
                           (influencers['Follower Count'] < tiers[tier_ix + 1])]
+        influencers.ix[sub.index, 'Tier'] = 'Tier ' + str(tier_ix + 1)
+    return influencers
 
-        arr = sorted(influencers['Engagement Index'].values)
-        influencers.ix[sub.index, 'Engagement Index'] = sub['Engagement Index']. \
+
+def run_indexing(influencers,
+                 TOP_X_PER_TIER=-1,
+                 base_column_name='Amplification Index',
+                 reindexed_column_name='Amplification Index'):
+    if reindexed_column_name not in influencers.columns:
+        influencers[reindexed_column_name] = 0
+
+    for tier_ix in influencers['Tier'].value_counts().index:
+        sub = influencers[(influencers['Tier'] == tier_ix)]
+
+        arr = sorted(sub[base_column_name].values)
+        if TOP_X_PER_TIER >= 0:
+            arr = arr[-TOP_X_PER_TIER:]
+        influencers.ix[sub.index, reindexed_column_name] = sub[base_column_name]. \
             apply(lambda e: percentileofscore(arr, e)).values
-
-    influencers['Influence Index'] = (influencers['Engagement Index']+influencers['Amplification Index'])/2.0
-
-    influencers.to_csv(save_path+'Influencers.csv', encoding='utf-8', quoting=csv.QUOTE_ALL, index=False)
 
     return influencers
