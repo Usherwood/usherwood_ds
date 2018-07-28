@@ -54,7 +54,8 @@ def tokenizer_pos(pos_tuplets):
 
     if type(pos_tuplets) != type(['list']):
         raise TypeError('Input should be a list of POS tuples')
-    if set([type(b) for b in pos_tuplets]) != set([type(('Tuple', 'E'))]):
+    if set([type(b) for b in pos_tuplets]) != set([type(('Tuple', 'E'))]) and pos_tuplets != []:
+        print(pos_tuplets)
         raise TypeError('Input should be a list of POS tuples')
 
     tokens = []

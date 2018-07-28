@@ -5,7 +5,7 @@ functions separately"""
 
 from main.nlp.processing.stopwords import stopword_removal
 from main.nlp.preprocessing.cleaning import clean_text
-from main.nlp.preprocessing.stemming import stem_text
+from main.nlp.preprocessing.stemming import Stemmer
 from main.nlp.preprocessing.social_feature_extraction import extract_hashtags, \
     extract_mentioned_users, extract_urls
 
@@ -39,6 +39,7 @@ def preprocess_df(data,
 
     :return: data with additional text/pos_tuple columns showing the cleaning process
     """
+    stemmer = Stemmer(language=language)
 
     if not pos_tuples:
         data['Cleaned'] = data.ix[:, text_field_key]
@@ -66,7 +67,7 @@ def preprocess_df(data,
         data['Cleaned'] = data.ix[:, 'Cleaned'].apply(lambda e: clean_text(text_string=e))
         print('Cleaned Text')
 
-        data['Stemmed'] = data.ix[:, 'Cleaned'].apply(lambda e: stem_text(text_string=e, language=language))
+        data['Stemmed'] = data.ix[:, 'Cleaned'].apply(lambda e: stemmer.stem_text(text_string=e))
         print('Stemmed Text')
 
         data['Preprocessed'] = data.ix[:, 'Stemmed'].apply(lambda e: stopword_removal(text_string=e,
@@ -89,7 +90,8 @@ def preprocess_df(data,
         data['Cleaned'] = data.ix[:, text_field_key].apply(lambda e: clean_text(tokens=e, pos_tuples=True))
         print('Cleaned Text')
 
-        data['Stemmed'] = data.ix[:, 'Cleaned'].apply(lambda e: stem_text(tokens=e, language=language, pos_tuples=True))
+        data['Stemmed'] = data.ix[:, 'Cleaned'].apply(lambda e: stemmer.stem_text(tokens=e,
+                                                                                  pos_tuples=True))
         print('Stemmed Text')
 
         data['Preprocessed'] = data.ix[:, 'Stemmed'].apply(lambda e: stopword_removal(tokens=e,
@@ -128,9 +130,11 @@ def preprocess_string(text_string=None,
     :return: preprocessed text in either string or list depending on (and matching) input
     """
 
+    stemmer = Stemmer(language=language)
+
     if text_string:
         text = clean_text(text_string=text_string)
-        text = stem_text(text_string=text, language=language)
+        text = stemmer.stem_text(text_string=text, language=language)
         text = stopword_removal(text_string=text,
                                 language=language,
                                 additional_list=additional_list,
@@ -138,7 +142,7 @@ def preprocess_string(text_string=None,
         preped = text
     else:
         tokens = clean_text(tokens=tokens, pos_tuples=pos_tuples)
-        tokens = stem_text(tokens=tokens, pos_tuples=pos_tuples, language=language)
+        tokens = stemmer.stem_text(tokens=tokens, pos_tuples=pos_tuples, language=language)
         tokens = stopword_removal(tokens=tokens,
                                   pos_tuples=pos_tuples,
                                   language=language,

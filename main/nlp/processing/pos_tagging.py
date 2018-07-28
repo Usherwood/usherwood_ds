@@ -11,7 +11,7 @@ import string
 import pickle
 import re
 
-from utils.linguistics.preprocessing.tokenizer import tokenizer_sentence
+from main.nlp.preprocessing.tokenizer import tokenizer_sentence
 
 __author__ = "Peter J Usherwood"
 __python_version__ = "3.6"
@@ -75,14 +75,14 @@ def train_pos_tagger(name='simplified_en',
     return True
 
 
-class TagSnippets():
+class TagSnippets:
 
     def __init__(self, tagger_name):
         """
 
         :param tagger_name: Name of pos tagger as it appears in utils_data/models/pos_taggers/
         """
-        file = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../../utils_data/models/pos_taggers/' +
+        file = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../../data/models/pos_taggers/' +
                             tagger_name + '.pkl')
 
         input = open(file, 'rb')

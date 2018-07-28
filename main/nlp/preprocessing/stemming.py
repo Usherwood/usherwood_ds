@@ -30,7 +30,6 @@ class Stemmer():
                 'Invalid language supplied to the stemmer, please choose from: ' + " ".join(SnowballStemmer.languages) +
                 '\nOr add a new stemmer to the repository ;)')
 
-
     def stem_text(self, text_string=None, tokens=None, pos_tuples=False, check_trailing=True):
         """
         Function that stems a text string using the NLTK snowball stemmer

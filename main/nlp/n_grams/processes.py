@@ -46,9 +46,9 @@ def generate_ngrams(data,
 
         text = data[text_field_key].values.tolist()
         if tfidf:
-            cv = TfidfVectorizer(max_features=50, preprocessor=None, analyzer=my_analyzer)
+            cv = TfidfVectorizer(max_features=max_features, preprocessor=None, analyzer=my_analyzer)
         else:
-            cv = CountVectorizer(max_features=50, preprocessor=None, analyzer=my_analyzer)
+            cv = CountVectorizer(max_features=max_features, preprocessor=None, analyzer=my_analyzer)
         word_frequency_matrix = cv.fit_transform(raw_documents=text)
     else:
         text = data[text_field_key]

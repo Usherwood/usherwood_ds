@@ -34,4 +34,4 @@ def video_query_to_excel(query='dogs',
 
 
 if __name__ == "__main__":
-    video_query_to_excel()
+    video_query_to_excel(root_dir='C:/Users/UsherwoodP/Documents/youtube_app_fix/')
