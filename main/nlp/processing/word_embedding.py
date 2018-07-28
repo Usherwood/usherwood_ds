@@ -36,15 +36,16 @@ class WordEmbedding(object):
         self.sorted_model_array = []
         self.labels = []
 
-    def load_word2vec_model(self, filename):
+    def load_word2vec_model(self, filename, binary=True):
         """
         Load in pre trained embeddings
 
-        :param filename: filepath to embeddings (.bin)
+        :param filename: filepath to embeddings
+        :param binary: Bool, if Trye then filename is .bin
         """
 
-        self.model = gensim.models.Word2Vec.load_word2vec_format(filename,
-                                                                 binary=True)
+        self.model = gensim.models.KeyedVectors.load_word2vec_format(filename,
+                                                                     binary=binary)
 
     def create_word2vec_model(self, filename, workers=4, min_count=5, size=200):
         """
