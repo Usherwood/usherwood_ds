@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../bibliotecas_terceiro/A-Guide-to-DeepMinds-StarCraft-AI-Environment/.idea/A-Guide-to-DeepMinds-StarCraft-AI-Environment.iml" filepath="$PROJECT_DIR$/../../bibliotecas_terceiro/A-Guide-to-DeepMinds-StarCraft-AI-Environment/.idea/A-Guide-to-DeepMinds-StarCraft-AI-Environment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../apps/django_apps/my_life/.idea/my_life.iml" filepath="$PROJECT_DIR$/../../apps/django_apps/my_life/.idea/my_life.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/usherwood_ds.iml" filepath="$PROJECT_DIR$/.idea/usherwood_ds.iml" />
     </modules>
   </component>

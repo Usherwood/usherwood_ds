@@ -14,6 +14,7 @@ import math
 import io
 from tweepy.streaming import StreamListener
 from tweepy import Stream
+import re
 
 from requests.exceptions import Timeout, ConnectionError
 import ssl
@@ -32,7 +33,8 @@ class TwitterAPI:
                  api_credentials=api_credentials,
                  run_time=1200,
                  save_increment=600,
-                 stream_save_path='raw_tweets.json'):
+                 stream_save_path='raw_tweets.json',
+                 regex_rule='test'):
 
         self.consumer_key = api_credentials["Twitter"]["consumer_key"]
         self.consumer_secret = api_credentials["Twitter"]["consumer_secret"]
@@ -42,19 +44,22 @@ class TwitterAPI:
         self.stream_api = None
         self.setup_api(run_time=run_time,
                        save_incrememnt=save_increment,
-                       stream_save_path=stream_save_path)
+                       stream_save_path=stream_save_path,
+                       regex_rule=regex_rule)
 
     def setup_api(self,
                   run_time,
                   save_incrememnt,
-                  stream_save_path):
+                  stream_save_path,
+                  regex_rule):
         """
         Setup the API, ran during the init
         """
 
         l = StdOutListener(time_limit=run_time,
                            save_increment=save_incrememnt,
-                           stream_save_path=stream_save_path)
+                           stream_save_path=stream_save_path,
+                           regex_rule=regex_rule)
 
         auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
         auth.set_access_token(self.access_token_key, self.access_token_secret)
@@ -449,7 +454,8 @@ class StdOutListener(StreamListener):
     def __init__(self,
                  time_limit=60,
                  save_increment=600,
-                 stream_save_path='raw_tweets.json'):
+                 stream_save_path='raw_tweets.json',
+                 regex_rule='test'):
 
         self.time = time.time()
         self.limit = time_limit
@@ -458,7 +464,8 @@ class StdOutListener(StreamListener):
         self.call_tick = 0
         self.save_increment = save_increment
         self.path = stream_save_path
-        self.new_file=False
+        self.new_file = False
+        self.regex_rule = regex_rule
 
     def on_data(self, data):
 
@@ -487,17 +494,19 @@ class StdOutListener(StreamListener):
         while (time.time() - self.time) < self.limit:
 
             try:
-                self.tweet_data.append(data)
-                if (time.time() - self.time) >= self.save_tick*self.save_increment:
-                    print(str(len(self.tweet_data)), 'new records saved')
-                    if self.save_tick == 1 and self.new_file:
-                        saveFile.write(u'[\n')
-                        saveFile.write(','.join(self.tweet_data))
-                    else:
-                        saveFile.write(','+','.join(self.tweet_data))
+                regexp = re.compile(self.regex_rule)
+                if regexp.search(data.lower()):
+                    self.tweet_data.append(data)
+                    if (time.time() - self.time) >= self.save_tick*self.save_increment:
+                        print(str(len(self.tweet_data)), 'new records saved')
+                        if self.save_tick == 1 and self.new_file:
+                            saveFile.write(u'[\n')
+                            saveFile.write(','.join(self.tweet_data))
+                        else:
+                            saveFile.write(','+','.join(self.tweet_data))
 
-                    self.tweet_data = []
-                    self.save_tick += 1
+                        self.tweet_data = []
+                        self.save_tick += 1
                 self.call_tick += 1
                 return True
 

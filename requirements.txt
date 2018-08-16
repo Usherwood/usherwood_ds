@@ -8,3 +8,4 @@ emoji
 praw
 tweepy
 progressbar2
+fastai
