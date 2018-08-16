@@ -31,9 +31,9 @@ def preprocess_df(data,
     :param language: Primary language (see stopwords/stemming)
     :param additional_list: List of additional pre set stopwords (see stopwords)
     :param adhoc_stopwords: List of adhoc stopwords (see stopwords)
-    :param remove_hashtag_words: Bool, remove the words that appear as hashtags
-    :param remove_mentioned_authors: Bool, remove the at mentioned authors
-    :param remove_urls: Bool, remove urls
+    :param remove_hashtag_words: Bool, remove the words that appear as hashtags and replace with token
+    :param remove_mentioned_authors: Bool, remove the at mentioned authors and replace with token
+    :param remove_urls: Bool, remove urls and replace with token
     :param stopped_not_stemmed: Return a field of cleaned and stopword removed text, useful for the categorizer
     :param pos_tuples: Bool, if tokens are a list of pos_tuples set this to true
 
@@ -45,20 +45,20 @@ def preprocess_df(data,
         data['Cleaned'] = data.ix[:, text_field_key]
         print('Loaded')
 
-        if remove_hashtag_words:
-            data['Cleaned'] = data.ix[:, 'Cleaned'].apply(lambda e: extract_hashtags(text_string=e,
-                                                                                     remove_hashtags=True)[0])
-        if remove_mentioned_authors:
-            data['Cleaned'] = data.ix[:, 'Cleaned'].apply(lambda e: extract_mentioned_users(text_string=e,
-                                                                                            remove_users=True)[0])
-        if remove_urls:
-            print('url remover not built')
-            remove_urls=False
+        data['Cleaned'], data['Hashtags'] = zip(*data.ix[:, 'Cleaned'].apply(
+            lambda e: extract_hashtags(text_string=e,
+                                       remove_hashtags=False,
+                                       replace_with_token=False)))
 
-        data['Hashtags'] = data.ix[:, 'Cleaned'].apply(lambda e: extract_hashtags(text_string=e,
-                                                                                 remove_hashtags=False)[1])
-        data['At Mentions'] = data.ix[:, 'Cleaned'].apply(lambda e: extract_mentioned_users(text_string=e,
-                                                                                        remove_users=False)[1])
+        data['Cleaned'], data['At Mentions'] = zip(*data.ix[:, 'Cleaned'].apply(
+            lambda e: extract_mentioned_users(text_string=e,
+                                              remove_users=False,
+                                              replace_with_token=True)))
+
+        data['Cleaned'], data['Extracted URLs'] = zip(*data.ix[:, 'Cleaned'].apply(
+            lambda e: extract_urls(text_string=e,
+                                   remove_urls=False,
+                                   replace_with_token=True)))
 
         print('Removed social features. Hashtags:', str(remove_hashtag_words),
               'At Mentions:', str(remove_mentioned_authors),
