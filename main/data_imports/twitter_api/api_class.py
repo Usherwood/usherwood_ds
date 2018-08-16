@@ -215,20 +215,31 @@ class TwitterAPI:
 
         tweets = []
         user = []
+        max_page = int(max_number/20)
+        print(max_page)
         try:
             if username:
-                batch_tweets = self.api.user_timeline(screen_name=username, count=max_number)
+                for ix, page in enumerate(tweepy.Cursor(self.api.user_timeline, screen_name=username).pages()):
+                    if ix < max_page:
+                        tweets += page
+                    else:
+                        tweets = [tweet._json for tweet in tweets]
+                        user = tweets[0]['user']
+                        return tweets, user
 
             elif user_id:
-                batch_tweets = self.api.user_timeline(user_id=user_id, count=max_number)
-
-            batch_tweets = [tweet._json for tweet in batch_tweets]
-
-            tweets += batch_tweets
-            user = tweets[0]['user']
+                for ix, page in enumerate(tweepy.Cursor(self.api.user_timeline, user_id=user_id).pages()):
+                    if ix < max_page:
+                        tweets += page
+                    else:
+                        tweets = [tweet._json for tweet in tweets]
+                        user = tweets[0]['user']
+                        return tweets, user
         except Exception as e:
             print(e)
 
+        tweets = [tweet._json for tweet in tweets]
+        user = tweets[0]['user']
         return tweets, user
 
     def get_user_friends_ids(self, username=None, user_id=None, max_number=5000):
