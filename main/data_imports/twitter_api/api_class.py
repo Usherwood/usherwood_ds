@@ -234,7 +234,8 @@ class TwitterAPI:
             print(e)
 
         tweets = [tweet._json for tweet in tweets]
-        user = tweets[0]['user']
+        if tweets:
+            user = tweets[0]['user']
         return tweets, user
 
     def get_user_friends_ids(self, username=None, user_id=None, max_number=5000):
