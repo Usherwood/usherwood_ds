@@ -45,20 +45,35 @@ def preprocess_df(data,
         data['Cleaned'] = data.ix[:, text_field_key]
         print('Loaded')
 
-        data['Cleaned'], data['Hashtags'] = zip(*data.ix[:, 'Cleaned'].apply(
+        data['Hashtags'] = data.ix[:, 'Cleaned'].apply(
             lambda e: extract_hashtags(text_string=e,
                                        remove_hashtags=False,
-                                       replace_with_token=False)))
+                                       replace_with_token=False)[1])
 
-        data['Cleaned'], data['At Mentions'] = zip(*data.ix[:, 'Cleaned'].apply(
+        data['Cleaned'] = data.ix[:, 'Cleaned'].apply(
+            lambda e: extract_hashtags(text_string=e,
+                                       remove_hashtags=False,
+                                       replace_with_token=remove_hashtag_words)[0])
+
+        data['At Mentions'] = data.ix[:, 'Cleaned'].apply(
             lambda e: extract_mentioned_users(text_string=e,
                                               remove_users=False,
-                                              replace_with_token=True)))
+                                              replace_with_token=False)[1])
 
-        data['Cleaned'], data['Extracted URLs'] = zip(*data.ix[:, 'Cleaned'].apply(
+        data['Cleaned'] = data.ix[:, 'Cleaned'].apply(
+            lambda e: extract_mentioned_users(text_string=e,
+                                              remove_users=False,
+                                              replace_with_token=remove_mentioned_authors)[0])
+
+        data['Extracted URLs'] = data.ix[:, 'Cleaned'].apply(
             lambda e: extract_urls(text_string=e,
                                    remove_urls=False,
-                                   replace_with_token=True)))
+                                   replace_with_token=False)[1])
+
+        data['Cleaned'] = data.ix[:, 'Cleaned'].apply(
+            lambda e: extract_urls(text_string=e,
+                                   remove_urls=False,
+                                   replace_with_token=remove_urls)[0])
 
         print('Removed social features. Hashtags:', str(remove_hashtag_words),
               'At Mentions:', str(remove_mentioned_authors),
