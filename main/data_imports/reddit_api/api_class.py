@@ -18,8 +18,8 @@ with open(os.path.join(os.path.dirname(__file__), "../api_credentials.json"), 'r
     api_credentials = json.load(openfile)
 
 
-class RedditAPI:
 
+class RedditAPI:
     def __init__(self, api_credentials=api_credentials):
 
         self.consumer_key = api_credentials["Reddit"]["consumer_key"]
@@ -45,7 +45,7 @@ class RedditAPI:
         Get the posts from a subreddit sorted by the sort_by method, 100 per request
 
         :param subreddit: String subreddit name
-        :param sort_type: String how to sort which posts toretrieve first, options are:
+        :param sort_type: String how to sort which posts to retrieve first, options are:
             controversial
             gilded
             hot
@@ -123,19 +123,24 @@ class RedditAPI:
 
         common_mention = TextMention()
 
-        common_mention.domain = 'reddit.com'
-        common_mention.source = 'RedditAPI'
-        common_mention.url = 'https://www.reddit.com/r/' + comment.subreddit.display_name + '/comments/' + comment.submission.id + '/'
-        common_mention.snippet = comment.body
-        common_mention.doc_id = common_mention.snippet + common_mention.url
-        common_mention.author_id = 'reddit.com' + comment.author.name
-        common_mention.dategmt = datetime.fromtimestamp(int(comment.created))
-        common_mention.datelocal = None #TODO add to class
-        common_mention.datelocalzone = None  # TODO add to class
-        common_mention.sentiment = 'Not Found because it does not exist'
-        common_mention.location = 'Doesnt Exist'  # TODO add location
-        common_mention.long = None
-        common_mention.lat = None
+        if isinstance(comment, MoreComments):
+            pass
+        else:
+            common_mention.domain = 'reddit.com'
+            common_mention.source = 'RedditAPI'
+            common_mention.url = 'https://www.reddit.com/r/' + comment.subreddit.display_name + '/comments/' \
+                                 + comment.submission.id + '/'
+            common_mention.snippet = comment.body
+            common_mention.doc_id = common_mention.snippet + common_mention.url
+            if comment.author:
+                common_mention.author_id = 'reddit.com' + comment.author.name
+            common_mention.dategmt = datetime.fromtimestamp(int(comment.created))
+            common_mention.datelocal = None #TODO add to class
+            common_mention.datelocalzone = None  # TODO add to class
+            common_mention.sentiment = 'Not Found because it does not exist'
+            common_mention.location = 'Doesnt Exist'  # TODO add location
+            common_mention.long = None
+            common_mention.lat = None
 
         return common_mention
 
@@ -153,12 +158,16 @@ class RedditAPI:
 
         common_user = User()
 
-        common_user.author_id = 'reddit.com' + comment.author.name
-        common_user.domain = 'reddit.com'
-        common_user.source = 'RedditAPI'
-        common_user.author_fullname = comment.author.fullname
-        common_user.author_username = comment.author.name
-        common_user.bio = 'Doesnt Exist'
-        common_user.profilepictureurl = 'Doesnt Exist'
+        if isinstance(comment, MoreComments):
+            pass
+        else:
+            common_user.domain = 'reddit.com'
+            common_user.source = 'RedditAPI'
+            if comment.author:
+                common_user.author_id = 'reddit.com' + comment.author.name
+                common_user.author_fullname = comment.author.name
+                common_user.author_username = comment.author.name
+            common_user.bio = 'Doesnt Exist'
+            common_user.profilepictureurl = 'Doesnt Exist'
 
         return common_user
