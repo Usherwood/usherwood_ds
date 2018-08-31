@@ -215,7 +215,7 @@ class TwitterAPI:
 
         tweets = []
         user = []
-        max_page = int(max_number/20)
+        max_page = int(max_number/20)+1
         print(max_page)
         try:
             if username:
@@ -275,6 +275,37 @@ class TwitterAPI:
             print(re)
             print('Passing User')
             return []
+
+    def get_tweet_replies(self,
+                          username,
+                          tweet_id,
+                          max_replies=100,
+                          max_tries=10000):
+        """
+        Gets all replies on a given tweet
+
+        :param username: Str, username of the original tweet author
+        :param tweet_id: Str, the tweet id to get replies on
+        :param max_replies: Int, maximum number of replies to try and get
+        :param max_tries: Int, maximum number of tweets to look through
+
+        :return: replies_raw, a list of tweets with user field
+        """
+
+        replies_raw = []
+
+        for reply in tweepy.Cursor(api.api.search, q='to:' + username,
+                                   result_type='recent',
+                                   timeout=999999).items(max_tries):
+            if hasattr(reply, 'in_reply_to_status_id_str'):
+                if (reply.in_reply_to_status_id_str == tweet_id):
+                    replies_raw.append(reply)
+                    if len(replies_raw) == max_replies:
+                        break
+
+        replies_raw = [reply._json for reply in replies_raw]
+
+        return replies_raw
 
     @staticmethod
     def parse_tweet_to_common_mention(tweet):

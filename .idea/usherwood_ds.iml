@@ -6,8 +6,6 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 3.6" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="my_life" />
-    <orderEntry type="module" module-name="A-Guide-to-DeepMinds-StarCraft-AI-Environment" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="Nosetests" />
