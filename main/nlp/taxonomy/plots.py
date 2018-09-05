@@ -11,7 +11,7 @@ __python_version__ = "3.6"
 
 def opportunities(ax, category_names, volumes, opportunity_scores, tertiary=None, labels=False, labels_min_vol=50,
                   opportunity_name='Sentiment', colour_scale=.5, font_size=7, x_lims=None, y_lims=None,
-                  colour=None, bubble_scale=1):
+                  colour=None, bubble_scale=1, xlabel='Importância'):
     """
     To plot opportunities for categories made through a taxonomy
 
@@ -29,11 +29,13 @@ def opportunities(ax, category_names, volumes, opportunity_scores, tertiary=None
     :param y_lims: List of 2 integers, the min and max values for the y-axis
     :param colour: List of 3 floats representing the rgb colour of the markers
     :param bubble_scale: Float, scale the size of the bubbles
+    :param xlabel: Str, x axis label
 
     :return ax1: Matplotlib axis
     """
 
     sns.set_style("white")
+    sns.set_palette("deep")
 
     if not colour:
         colour = [140/255, 200/255, 219/255]
@@ -50,7 +52,7 @@ def opportunities(ax, category_names, volumes, opportunity_scores, tertiary=None
                 ax.text(x, y, s, size=font_size, color='k')# + np.random.standard_normal(1)*.05
 
     if tertiary is None:
-        ax.scatter(volumes, opportunity_scores, s=volumes*bubble_scale, c=colour, lw=0)
+        ax.scatter(volumes, opportunity_scores, s=volumes*bubble_scale, c=[colour], lw=0)
     else:
         green = np.zeros((len(volumes), 4))
         green[:, 0] = 30 / 255
@@ -59,7 +61,7 @@ def opportunities(ax, category_names, volumes, opportunity_scores, tertiary=None
         green[:, 3] = pow(tertiary, colour_scale) / max(pow(tertiary, colour_scale))
         ax.scatter(volumes*bubble_scale, opportunity_scores, s=volumes, c=green, lw=0)
 
-    ax.set_xlabel('Mentions')
+    ax.set_xlabel(xlabel)
     ax.set_ylabel(opportunity_name)
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
