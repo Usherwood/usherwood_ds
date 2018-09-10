@@ -23,7 +23,7 @@ def influencer_identification(handles,
                               TOP_X_CONNECTED=2000,
                               api_credentials=None,
                               inc_tiers=True,
-                              tiers=[1500,5000,20000,100000],
+                              tiers=[1500, 5000, 20000, 100000],
                               TOP_X_PER_TIER=-1):
     """
     Run the analysis to find the top influential accounts on Twitter. This is the full influencer analysis, for a
@@ -40,13 +40,13 @@ def influencer_identification(handles,
     """
 
     if api_credentials is None:
-        with open(os.path.join(os.path.dirname(__file__), "../api_credentials.json"), 'r') as openfile:
+        with open(os.path.join(os.path.dirname(__file__), "data_imports/api_credentials.json"), 'r') as openfile:
             api_credentials = json.load(openfile)
 
     api = TwitterAPI(api_credentials=api_credentials)
 
     print('Fortifying target market')
-    target_market, TM_SIZE = fortify_tm_with_engamements(handles=handles, save_path=save_path, api=api)
+    target_market, TM_SIZE = fortify_tm_with_previous_posts(handles=handles, save_path=save_path, api=api)
     print('Getting sphere of influence')
     influencers = get_sphere_of_influence(target_market=target_market, save_path=save_path, api=api)
     print('Fortifying sphere of influence and getting amplification')
@@ -130,7 +130,7 @@ def fortify_tm_without_engamements(handles, api, save_path=''):
     return target_market, TM_SIZE
 
 
-def fortify_tm_with_engamements(handles, api, max_tweets=100, save_path=''):
+def fortify_tm_with_previous_posts(handles, api, max_tweets=100, save_path=''):
     """
     fortify the tm with user info and past max_tweets for engagement measures
 
@@ -258,7 +258,7 @@ def get_amplification_influencers(TM_SIZE,
     influencers_fort['Twitter Author ID'] = influencers_fort['Twitter Author ID'].astype(np.int64)
     influencers = influencers_fort.merge(influencers, how='inner', on='Twitter Author ID')
     influencers['Amplification Index'] = influencers[['Follower Count', 'TM Amplification']].apply(
-        lambda x: (x[1] / TM_SIZE) * (TM_SIZE / x[0]), axis=1)
+        lambda x: x[1] * (TM_SIZE / x[0]), axis=1)
     influencers.sort_values(by='Amplification Index', inplace=True, ascending=False)
 
     influencers['Tier'] = 0
