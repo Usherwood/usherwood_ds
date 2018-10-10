@@ -4,6 +4,7 @@
 
 import string
 import re
+import html
 
 from main.nlp.preprocessing.tokenizer import tokenizer_word, tokenizer_pos, de_tokenizer_pos
 
@@ -20,7 +21,7 @@ def clean_text(text_string=None,
                lower=True,
                tokens_to_ignore=["[USER]", "[HASHTAG]", "[URL]"]):
     """
-    Function that cleans text using any combination of the below functions
+    Function that cleans text in standard work using any combination of the below functions
 
     :param text_string: Python string object to be tokenized and cleaned
     :param tokens: Python list of strings already tokenized
@@ -74,6 +75,27 @@ def clean_text(text_string=None,
         cleaned = de_tokenizer_pos(tokens, tokens_tags)
 
     return cleaned
+
+
+def clean_text_for_language_model(text):
+    """
+    Cleans text for deep learning language models, applies pre tokenization
+
+    :param text: Str, text string
+
+    :return: cleaned string
+    """
+
+    re_repetition = re.compile(r'(\S)(\1{3,})') #repetition of multiple non-whitespace characters
+    re_word_repetition = re.compile(r'(\b\w+\W+)(\1{3,})') #repetition of multiple words
+
+    s = text
+    s = re_repetition.sub(replace_repeated_character, s)
+    s = re_word_repetition.sub(replace_repeated_word, s)
+    s = lower_and_add_toks_for_case(s)
+    s = add_spaces_to_hashtags_and_slashes(s)
+    s = remove_multiple_whitespace_from_string(s)
+    return s
 
 
 def remove_additional_whitespace(tokens):
@@ -134,3 +156,62 @@ def lower_tokens(tokens,
             token = token.lower()
         cleaned_tokens.append(token)
     return cleaned_tokens
+
+
+def replace_repeated_character(m):
+    """
+    The expression to sub for repeated letters
+
+    :param m: the match of the regex
+
+    :return: substituted string
+    """
+    TK_REP = 'tk_rep'
+    c, cc = m.groups()
+    return f' {TK_REP} {len(cc)+1} {c} '
+
+
+def replace_repeated_word(m):
+    """
+    The expression to sub for repeated words
+
+    :param m: the match of the regex
+
+    :return: substituted string
+    """
+    TK_WREP = 'tk_wrep'
+    c, cc = m.groups()
+    return f' {TK_WREP} {len(cc.split())+1} {c} '
+
+
+def remove_multiple_whitespace_from_string(s):
+    s = re.sub(' {2,}', ' ', s)
+    return s
+
+
+def add_spaces_to_hashtags_and_slashes(s):
+    s = re.sub(r'([/#])', r' \1 ', s)
+    return s
+
+
+def lower_and_add_toks_for_case(s):
+    TOK_UP, TOK_SENT, TOK_MIX = ' t_up ', ' t_st ', ' t_mx '
+    res = []
+    prev = '.'
+    re_word = re.compile('\w')
+    re_nonsp = re.compile('\S')
+    for token in re.findall(r'\w+|\W+', s):
+        if token.isupper() and len(token) > 2:
+            res += [TOK_UP, token.lower()]
+        else:
+            res += [token.lower()]
+    return ''.join(res)
+
+
+def fixup(s):
+    re1 = re.compile(r'  +')
+    s = s.replace('#39;', "'").replace('amp;', '&').replace('#146;', "'").replace(
+        'nbsp;', ' ').replace('#36;', '$').replace('\\n', "\n").replace('quot;', "'").replace(
+        '<br />', "\n").replace('\\"', '"').replace('<unk>','u_n').replace(' @.@ ','.').replace(
+        ' @-@ ','-').replace('\\', ' \\ ')
+    return re1.sub(' ', html.unescape(s))
