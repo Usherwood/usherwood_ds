@@ -12,7 +12,7 @@ from datetime import datetime
 
 from apiclient.discovery import build
 from main.data_imports.import_classes.youtube_classes import YoutubeTextComment, YoutubeVideo, YoutubeUser
-from main.data_imports.import_classes.common_classes import User
+from main.data_imports.import_classes.common_classes import User, TextMention
 
 
 with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../api_credentials.json"), 'r') as openfile:
@@ -410,3 +410,65 @@ class YoutubeAPI:
         youtube_user.video_count = user['statistics']['videoCount']
 
         return youtube_user
+
+    @staticmethod
+    def parse_comment_to_common_user(comment):
+        """
+        Creates a common user from a comment object from the Youtube API
+
+        :param comment: the Youtube json response
+
+        :return: CommonUser
+        """
+
+        common_user = User()
+
+        user = comment['snippet']['topLevelComment']['snippet']
+
+        common_user.author_id = 'youtube.com' + str(user['authorChannelId']['value'])
+        common_user.domain = 'youtube.com'
+        common_user.source = 'YoutubeAPI'
+        common_user.author_fullname = None
+        common_user.author_username = user['authorDisplayName']
+        common_user.bio = None
+        common_user.profilepictureurl = user['authorProfileImageUrl']
+
+        return common_user
+
+    @staticmethod
+    def parse_comment_to_common_mention(comment):
+        """
+        Creates a Text Comment Mention object from a comment from the Youtube Data API
+
+        :param comment: the Youtube json response for a video comment
+
+        :return: TextMention
+        """
+
+        common_comment = TextMention()
+
+        common_comment.doc_id = comment['snippet']['topLevelComment']['snippet']['textDisplay'] + \
+            'https://www.youtube.com/watch?v='+str(comment['snippet']['videoId'])
+        common_comment.url = 'https://www.youtube.com/watch?v='+str(comment['snippet']['videoId'])
+        common_comment.domain = 'youtube.com'
+        common_comment.source = 'YoutubeAPI'
+
+        try:
+            common_comment.author_id = 'youtube.com' + comment['snippet']['topLevelComment']['snippet']\
+                                                               ['authorChannelId']['value']
+        except Exception as e:
+            print(e)
+            common_comment.author_id = 'Not Found'
+
+        common_comment.dategmt = datetime.strptime(comment['snippet']['topLevelComment']['snippet']['publishedAt'],
+                                                 '%Y-%m-%dT%H:%M:%S.%fZ')
+        common_comment.datelocal = None
+        common_comment.datelocalzone = None
+        common_comment.snippet = comment['snippet']['topLevelComment']['snippet']['textDisplay']
+
+        common_comment.sentiment = None
+        common_comment.location = None
+        common_comment.lat = None
+        common_comment.long = None
+
+        return common_comment
