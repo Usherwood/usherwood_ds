@@ -2,5 +2,16 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../_third_party/quantipy" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../brasil_ds" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../brasil_powerbi" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../stan_categorizer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../stan_categorizer.brasil" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../stan_data_imports" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../stan_data_imports.brasil" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../stan_enrich" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../stan_enrich.brasil" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../stan_preprocessing" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../stan_preprocessing.brasil" vcs="Git" />
   </component>
 </project>

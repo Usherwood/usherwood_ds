@@ -3,7 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../../bibliotecas_terceiro/A-Guide-to-DeepMinds-StarCraft-AI-Environment/.idea/A-Guide-to-DeepMinds-StarCraft-AI-Environment.iml" filepath="$PROJECT_DIR$/../../bibliotecas_terceiro/A-Guide-to-DeepMinds-StarCraft-AI-Environment/.idea/A-Guide-to-DeepMinds-StarCraft-AI-Environment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../brasil_ds/.idea/brasil_ds.iml" filepath="$PROJECT_DIR$/../brasil_ds/.idea/brasil_ds.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../brasil_powerbi/.idea/brasil_powerbi.iml" filepath="$PROJECT_DIR$/../brasil_powerbi/.idea/brasil_powerbi.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../apps/django_apps/my_life/.idea/my_life.iml" filepath="$PROJECT_DIR$/../../apps/django_apps/my_life/.idea/my_life.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../stan_categorizer.brasil/.idea/stan_categorizer.iml" filepath="$PROJECT_DIR$/../stan_categorizer.brasil/.idea/stan_categorizer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../stan_data_imports.brasil/.idea/stan_data_imports.iml" filepath="$PROJECT_DIR$/../stan_data_imports.brasil/.idea/stan_data_imports.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../stan_enrich.brasil/.idea/stan_enrich.iml" filepath="$PROJECT_DIR$/../stan_enrich.brasil/.idea/stan_enrich.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../stan_preprocessing.brasil/.idea/stan_preprocessing.iml" filepath="$PROJECT_DIR$/../stan_preprocessing.brasil/.idea/stan_preprocessing.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/usherwood_ds.iml" filepath="$PROJECT_DIR$/.idea/usherwood_ds.iml" />
     </modules>
   </component>

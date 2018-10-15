@@ -6,6 +6,11 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 3.6" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="stan_data_imports" />
+    <orderEntry type="module" module-name="stan_enrich" />
+    <orderEntry type="module" module-name="stan_categorizer" />
+    <orderEntry type="module" module-name="stan_preprocessing" />
+    <orderEntry type="module" module-name="brasil_powerbi" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="Nosetests" />
