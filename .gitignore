@@ -15,3 +15,5 @@ __pycache__/
 # Junk
 .ipynb_checkpoints/
 .idea/
+
+usherwood_ds/data_imports/api_credentials.json

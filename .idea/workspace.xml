@@ -13,86 +13,11 @@
       <change beforePath="$PROJECT_DIR$/../brasil_powerbi/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../brasil_powerbi/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../stan_data_imports.brasil/stan_data_imports/social/tool_downloads/netbase.py" beforeDir="false" afterPath="$PROJECT_DIR$/../stan_data_imports.brasil/stan_data_imports/social/tool_downloads/netbase.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../stan_data_imports.brasil/stan_data_imports/survey/nfield_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../stan_data_imports.brasil/stan_data_imports/survey/nfield_api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/usherwood_ds.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/usherwood_ds.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/api_credentials.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/api_credentials.json.template" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/api_credentials.json.template" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/import_classes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/import_classes/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/import_classes/common_classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/import_classes/common_classes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/import_classes/twitter_classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/import_classes/twitter_classes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/import_classes/youtube_classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/import_classes/youtube_classes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/reddit_api/api_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/reddit_api/api_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/reddit_api/run_scripts/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/reddit_api/run_scripts/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/reddit_api/run_scripts/search_comments_to_excel.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/reddit_api/run_scripts/search_comments_to_excel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/twitter_api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/twitter_api/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/twitter_api/api_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/twitter_api/api_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/twitter_import.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/twitter_import.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/unified_import.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/unified_import.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/youtube_api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/youtube_api/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/youtube_api/api_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/youtube_api/api_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/youtube_api/run_scripts/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/get_all_user_videos_and_comments.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/youtube_api/run_scripts/get_all_user_videos_and_comments.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/video_comments_to_excel.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/youtube_api/run_scripts/video_comments_to_excel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/youtube_api/run_scripts/video_query_to_excel.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/youtube_api/run_scripts/video_query_to_excel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/data_imports/youtube_import.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/data_imports/youtube_import.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/df_creator/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/df_creator/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/df_creator/columns/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/df_creator/columns/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/df_creator/columns/binary.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/df_creator/columns/binary.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/df_creator/columns/date.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/df_creator/columns/date.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/df_creator/columns/domains_and_urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/df_creator/columns/domains_and_urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/df_creator/columns/number.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/df_creator/columns/number.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/df_creator/columns/text_random.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/df_creator/columns/text_random.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/df_creator/columns/text_topic.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/df_creator/columns/text_topic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/df_creator/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/df_creator/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/projects/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/projects/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/projects/convolutional/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/projects/convolutional/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/projects/convolutional/profile_picture_demographics/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/projects/convolutional/profile_picture_demographics/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/projects/convolutional/profile_picture_demographics/facial_recognition.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/projects/convolutional/profile_picture_demographics/facial_recognition.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/projects/convolutional/profile_picture_demographics/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/projects/convolutional/profile_picture_demographics/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/projects/feed_forward/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/projects/feed_forward/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/projects/rnn/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/projects/rnn/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/projects/rnn/sentiment_classifier/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/projects/rnn/sentiment_classifier/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/projects/rnn/sentiment_classifier/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/projects/rnn/sentiment_classifier/predict.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/projects/rnn/sentiment_classifier/preprocess_movies_training_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/projects/rnn/sentiment_classifier/preprocess_movies_training_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/projects/rnn/sentiment_classifier/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/projects/rnn/sentiment_classifier/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/projects/rnn/wildml_language_model/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/projects/rnn/wildml_language_model/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/utils/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/utils/confusion_matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/utils/confusion_matrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/neural_networks/utils/feed_forward_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/neural_networks/utils/feed_forward_network.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/LDA.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/LDA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/distinctive_words.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/distinctive_words.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/n_grams/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/n_grams/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/n_grams/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/n_grams/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/n_grams/processes.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/n_grams/processes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/preprocessing/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/preprocessing/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/preprocessing/cleaning.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/preprocessing/cleaning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/preprocessing/preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/preprocessing/preprocess.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/preprocessing/social_feature_extraction.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/preprocessing/social_feature_extraction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/preprocessing/stemming.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/preprocessing/stemming.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/preprocessing/tokenizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/preprocessing/tokenizer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/processing/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/processing/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/processing/pos_tagging.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/processing/pos_tagging.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/processing/stopwords.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/processing/stopwords.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/processing/word_embedding.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/processing/word_embedding.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/taxonomy/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/taxonomy/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/taxonomy/bycat.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/taxonomy/bycat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/taxonomy/create_macro_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/taxonomy/create_macro_tags.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/taxonomy/plots.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/taxonomy/plots.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/nlp/taxonomy/spark_regex_categorizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/nlp/taxonomy/spark_regex_categorizer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/time_series/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/time_series/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/time_series/time_series_funcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/time_series/time_series_funcs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/tools/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/tools/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/tools/datetime_convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/tools/datetime_convert.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/tools/topic_wordclouds.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/tools/topic_wordclouds.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/twitter_influencers.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/twitter_influencers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/youtube_influencers.py" beforeDir="false" afterPath="$PROJECT_DIR$/usherwood_ds/youtube_influencers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutoriais/Conceitos Básicos 1 - Variáveis.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/tutoriais/Conceitos Básicos 1 - Variáveis.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutoriais/Conceitos Básicos 2 - Loops, Funções e Classes .ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/tutoriais/Conceitos Básicos 2 - Loops, Funções e Classes .ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutoriais/Em Progresso.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/tutoriais/Em Progresso.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutoriais/Exemplo - Árvores de Classificação e Regressão.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/tutoriais/Exemplo - Árvores de Classificação e Regressão.ipynb" afterDir="false" />
     </list>
     <ignored path="usherwood_ds.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -152,7 +77,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="config" value="1" />
-          <entry key="gitignore" value="3" />
+          <entry key="gitignore" value="4" />
           <entry key="json" value="4" />
           <entry key="log" value="1" />
           <entry key="md" value="1" />
@@ -166,7 +91,7 @@
         <counts>
           <entry key="JSON" value="4" />
           <entry key="Markdown" value="1" />
-          <entry key="PLAIN_TEXT" value="11" />
+          <entry key="PLAIN_TEXT" value="12" />
           <entry key="Python" value="234" />
           <entry key="YAML" value="14" />
         </counts>
@@ -174,7 +99,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="11" />
-          <entry key="gitignore" value="50" />
+          <entry key="gitignore" value="101" />
           <entry key="json" value="12" />
           <entry key="py" value="40269" />
           <entry key="template" value="33" />
@@ -185,7 +110,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="12" />
-          <entry key="PLAIN_TEXT" value="98" />
+          <entry key="PLAIN_TEXT" value="149" />
           <entry key="Python" value="40269" />
           <entry key="YAML" value="1048" />
         </counts>
@@ -197,7 +122,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../brasil_ds/brasil_ds/padrao/social_media_analisa_da_marca/elementos/oque.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="313">
@@ -208,6 +133,15 @@
                 <marker date="1539605192777" expanded="true" signature="22663:22664" ph="..." />
                 <marker date="1539605192777" expanded="true" signature="24529:24535" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="46" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -227,7 +161,7 @@
         <entry file="file://$PROJECT_DIR$/../../Projetos/Padroes/Social Media Analisa da Marca/AmericanasXPernambucanas/3.Analisa/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="408">
-              <caret line="36" column="31" lean-forward="true" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
+              <caret line="36" column="31" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -250,7 +184,7 @@
         <entry file="file://$PROJECT_DIR$/../brasil_ds/brasil_ds/padrao/social_media_analisa_da_marca/elementos/enriquecer.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="276">
-              <caret line="29" column="63" lean-forward="true" selection-start-line="29" selection-start-column="63" selection-end-line="29" selection-end-column="63" />
+              <caret line="29" column="63" selection-start-line="29" selection-start-column="63" selection-end-line="29" selection-end-column="63" />
               <folding>
                 <element signature="e#148#167#0" expanded="true" />
               </folding>
@@ -286,7 +220,7 @@
         <entry file="file://$PROJECT_DIR$/../brasil_ds/brasil_ds/utils/pptx/quando.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1020">
-              <caret line="60" column="66" lean-forward="true" selection-start-line="60" selection-start-column="66" selection-end-line="60" selection-end-column="66" />
+              <caret line="60" column="66" selection-start-line="60" selection-start-column="66" selection-end-line="60" selection-end-column="66" />
               <folding>
                 <element signature="e#195#214#0" expanded="true" />
               </folding>
@@ -339,12 +273,11 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../brasil_ds" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../stan_preprocessing.brasil/stan_preprocessing/preprocessing/tokenizer.py" />
         <option value="$PROJECT_DIR$/../stan_preprocessing.brasil/stan_preprocessing/preprocessing/stemming.py" />
         <option value="$PROJECT_DIR$/../stan_preprocessing.brasil/requirements.txt" />
         <option value="$PROJECT_DIR$/../stan_preprocessing.brasil/stan_preprocessing/preprocessing/preprocess.py" />
@@ -395,6 +328,7 @@
         <option value="$PROJECT_DIR$/../brasil_ds/brasil_ds/padrao/social_media_analisa_da_marca/elementos/enriquecer.py" />
         <option value="$PROJECT_DIR$/../../Projetos/Advancados/vivo_get_data_api/project/main_run.py" />
         <option value="$PROJECT_DIR$/../brasil_ds/brasil_ds/padrao/social_media_analisa_da_marca/elementos/oque.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -414,6 +348,21 @@
       <pane id="ProjectPane">
         <subPane>
           <expand>
+            <path>
+              <item name="usherwood_ds" type="b2602c69:ProjectViewProjectNode" />
+              <item name="usherwood_ds" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="usherwood_ds" type="b2602c69:ProjectViewProjectNode" />
+              <item name="usherwood_ds" type="462c0819:PsiDirectoryNode" />
+              <item name="usherwood_ds" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="usherwood_ds" type="b2602c69:ProjectViewProjectNode" />
+              <item name="usherwood_ds" type="462c0819:PsiDirectoryNode" />
+              <item name="usherwood_ds" type="462c0819:PsiDirectoryNode" />
+              <item name="data_imports" type="462c0819:PsiDirectoryNode" />
+            </path>
             <path>
               <item name="usherwood_ds" type="b2602c69:ProjectViewProjectNode" />
               <item name="brasil_ds" type="462c0819:PsiDirectoryNode" />
@@ -708,13 +657,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../stan_preprocessing.brasil/stan_preprocessing/preprocessing/tokenizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="25" selection-start-line="25" selection-end-line="26" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../Projetos/Padroes/Social Media Analisa da Marca/Baterias Moura/3.Analisa/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="310">
@@ -1012,7 +954,7 @@
     <entry file="file://$PROJECT_DIR$/../brasil_ds/brasil_ds/utils/pptx/quando.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1020">
-          <caret line="60" column="66" lean-forward="true" selection-start-line="60" selection-start-column="66" selection-end-line="60" selection-end-column="66" />
+          <caret line="60" column="66" selection-start-line="60" selection-start-column="66" selection-end-line="60" selection-end-column="66" />
           <folding>
             <element signature="e#195#214#0" expanded="true" />
           </folding>
@@ -1054,7 +996,7 @@
     <entry file="file://$PROJECT_DIR$/../brasil_ds/brasil_ds/padrao/social_media_analisa_da_marca/elementos/enriquecer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
-          <caret line="29" column="63" lean-forward="true" selection-start-line="29" selection-start-column="63" selection-end-line="29" selection-end-column="63" />
+          <caret line="29" column="63" selection-start-line="29" selection-start-column="63" selection-end-line="29" selection-end-column="63" />
           <folding>
             <element signature="e#148#167#0" expanded="true" />
           </folding>
@@ -1064,7 +1006,7 @@
     <entry file="file://$PROJECT_DIR$/../../Projetos/Padroes/Social Media Analisa da Marca/AmericanasXPernambucanas/3.Analisa/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
-          <caret line="36" column="31" lean-forward="true" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
+          <caret line="36" column="31" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -1094,6 +1036,13 @@
             <marker date="1539605192777" expanded="true" signature="22663:22664" ph="..." />
             <marker date="1539605192777" expanded="true" signature="24529:24535" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="46" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
         </state>
       </provider>
     </entry>
