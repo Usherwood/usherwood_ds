@@ -135,7 +135,6 @@ class NNSentimentTrain:
                         # Write summary to Tensorboard
                         if i % 200 == 0:
                             writer = tf.summary.FileWriter(logdir, sess.graph)
-
                             summary = sess.run(merged, {self.X: next_batch_x, self.Y: next_batch_y})
                             writer.add_summary(summary, i)
 
