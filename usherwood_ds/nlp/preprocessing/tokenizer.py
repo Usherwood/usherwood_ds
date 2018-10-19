@@ -4,18 +4,21 @@
 non-English languages"""
 
 import shlex
+import re
 from nltk.tokenize import sent_tokenize
 
 __author__ = "Peter J Usherwood"
 __python_version__ = "3.6"
 
 
-def tokenizer_word(text_string, keep_phrases=False):
+def tokenizer_word(text_string, keep_phrases=False, tokenize_punc=False):
     """
     Tokenizer that tokenizes a string of text on spaces and new lines (regardless of however many of each.)
 
     :param text_string: Python string object to be tokenized.
     :param keep_phrases: Booalean will not split "quoted" text
+    ?param tokenize_punc: Boolean, if true will tokenize punctuation so "hello," becomes ["hello", ","]
+
     :return: Array of strings, each is a word
     """
 
@@ -23,6 +26,8 @@ def tokenizer_word(text_string, keep_phrases=False):
 
     if keep_phrases:
         tokens = shlex.split(text_string.replace('\n', ' ').replace('/', ' '))
+    elif tokenize_punc:
+        tokens = re.findall(r"[\w']+|[.,!?;]", text_string)
     else:
         tokens = text_string.replace('\n', ' ').replace('/', ' ').split()
 
